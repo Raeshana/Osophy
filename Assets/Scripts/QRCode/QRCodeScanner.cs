@@ -4,9 +4,11 @@ using UnityEngine;
 using ZXing;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class QRCodeScanner : MonoBehaviour
 {
+    [Header("Scan Settings")]
     [SerializeField]
     private RawImage _background;
     [SerializeField]
@@ -14,12 +16,22 @@ public class QRCodeScanner : MonoBehaviour
     [SerializeField]
     private RectTransform _scanZone;
 
-    // Change to updating player profile
+    [Header("Player Settings")]
+    [SerializeField]
+    private PlayerOsopherDict _playerOsopherDict;
+    // Testing Feedback
     [SerializeField]
     private TextMeshProUGUI _text;
 
+    [Header("Osopher Settings")]
+    private GameOsopherDict _gameOsopherDict; 
+
     private bool _isCamAvailable;
     private WebCamTexture _camTex;
+
+    void Awake () {
+        _gameOsopherDict = GameObject.FindWithTag("OsopherManager").GetComponent<GameOsopherDict>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -85,7 +97,12 @@ public class QRCodeScanner : MonoBehaviour
             IBarcodeReader barcodeReader = new BarcodeReader();
             Result result = barcodeReader.Decode(_camTex.GetPixels32(), _camTex.width, _camTex.height);
             if (result != null) {
-                _text.text = result.Text;
+                // Successfully read QR Code
+                _text.text = result.Text; // change text for debugging
+                // Check if QR Code text is a valid Osopher
+                if (_gameOsopherDict.osopherDict[result.Text]) {
+                    _playerOsopherDict.AddOsopher(result.Text);
+                }
             } 
             else {
                 _text.text = "FAILED TO READ QR CODE";
