@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2944402168666343b094893d1789843, type: 3}
-  m_Name: Diogenes
+  m_Name: ConfuciusSO
   m_EditorClassIdentifier: 
-  osopherName: Diogenes
-  osopherTitle: 
+  osopherName: Confucius
+  osopherTitle: The Sage
+  osopherImage: {fileID: 21300000, guid: 368f47c4b23cf9c40b07b6cc959496c4, type: 3}
   osopherQuestions: []
