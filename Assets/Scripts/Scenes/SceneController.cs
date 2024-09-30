@@ -15,4 +15,26 @@ public class SceneController : MonoBehaviour
         int next = current + 1;
         SceneManager.LoadScene(next, LoadSceneMode.Single);
     }
+
+    // DEFINE THE FOLLOWING FUNCTIONS ****************************************************************************
+
+    /// <summary>
+    /// When called, transitions to the 
+    /// celebration scene for getting an answer
+    /// right
+    /// </summary>
+    public void GoToRightScene(){
+        // Ensure RightScene is added to the list of scenes in SceneManager
+        // Use SceneManager to navigate to this scene
+    }
+    
+    /// <summary>
+    /// When called, transitions to the 
+    /// sad scene for getting an answer
+    /// wrong
+    /// </summary>
+    public void GoToWrongScene(){
+        // Ensure CorrectScene is added to the list of scenes in SceneManager
+        // Use SceneManager to navigate to this scene
+    }
 }

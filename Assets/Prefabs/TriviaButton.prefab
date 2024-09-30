@@ -8,9 +8,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2073971420603869320, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
+      propertyPath: m_text
+      value: RIGHT ANSWER
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073971420603869320, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
+      propertyPath: m_fontSize
+      value: 58.8
+      objectReference: {fileID: 0}
     - target: {fileID: 3716323598519821733, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
       propertyPath: m_Name
       value: TriviaButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749709790812382640, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749709790812382640, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749709790812382640, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749709790812382640, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749709790812382640, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749709790812382640, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 8552726776326921273, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
       propertyPath: m_Pivot.x
@@ -78,7 +110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8552726776326921273, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -500
+      value: -99
       objectReference: {fileID: 0}
     - target: {fileID: 8552726776326921273, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

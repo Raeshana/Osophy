@@ -17,12 +17,15 @@ public class PlayerOsopherDict : MonoBehaviour
 
     /// <summary>
     /// Inserts a <string, OsopherSO> kvp into player Osopher dict 
+    /// If it does not already exist
     /// Does not check if Osopher is valid, wrap in if statement:
     /// if (GameOsopherDict.gameOsopherDict.FindOsopher(result.Text))
     /// </summary>
     /// <param name="osopherName"> Name of Osopher you would like to add </param>
     public void AddOsopher(string osopherName) {
-        osopherDict.Add(osopherName, _gameOsopherDict.GetOsopherSO(osopherName));
+        if (!FindOsopher(osopherName)) {
+            osopherDict.Add(osopherName, _gameOsopherDict.GetOsopherSO(osopherName));
+        }
     }
 
     /// <summary>
