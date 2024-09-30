@@ -7,5 +7,5 @@ public class OsopherSO : ScriptableObject
 {
     public string osopherName;
     public string osopherTitle;
-    // array of question-answer scriptable objects
+    public QuestionSO[] osopherQuestions;
 }
