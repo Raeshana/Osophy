@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1165349644393827352}
   m_Layer: 0
   m_Name: OsopherManager
-  m_TagString: OsopherManager
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _osopherSOArr:
   - {fileID: 11400000, guid: 34043a9ac993e3849b7610fc122d831e, type: 2}
+  - {fileID: 11400000, guid: 3b582321afc72364d89eda389b48fd89, type: 2}
+  - {fileID: 11400000, guid: bcf1f673e0f300944a54c8e77fdedcdc, type: 2}
 --- !u!114 &1165349644393827352
 MonoBehaviour:
   m_ObjectHideFlags: 0

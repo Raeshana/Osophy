@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 
 public class QRCodeScanner : MonoBehaviour
 {
-    [Header("Scan Settings")]
+    [Header("Scan Settings ----------")]
     [SerializeField]
     private RawImage _background;
     [SerializeField]
@@ -16,35 +16,46 @@ public class QRCodeScanner : MonoBehaviour
     [SerializeField]
     private RectTransform _scanZone;
 
-    [Header("Player Settings")]
+    [Header("Player Settings ----------")]
     [SerializeField]
     private PlayerOsopherDict _playerOsopherDict;
     // Testing Feedback
     [SerializeField]
     private TextMeshProUGUI _text;
 
-    [Header("Osopher Settings")]
+    [Header("Osopher Settings ----------")]
+    [SerializeField]
     private GameOsopherDict _gameOsopherDict; 
+    private int _osopherNum = 3;
 
+    [Header("Camera Settings ----------")]
     private bool _isCamAvailable;
     private WebCamTexture _camTex;
 
-    void Awake () {
-        _gameOsopherDict = GameObject.FindWithTag("OsopherManager").GetComponent<GameOsopherDict>();
-    }
+    [Header("Scene Settings ----------")]
+    [SerializeField]
+    private SceneController _sceneController;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Sets up the camera
+    /// </summary>
     void Start()
     {
         SetUpCam();
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Ensures that camera feedback is real-time
+    /// </summary>
     void Update()
     {
         UpdateCamRenderer();
     }
 
+    /// <summary>
+    /// Determines if a camera is available
+    /// Plays camera feedback to background
+    /// </summary>
     private void SetUpCam() {
         WebCamDevice[] devices = WebCamTexture.devices;
 
@@ -68,6 +79,9 @@ public class QRCodeScanner : MonoBehaviour
         _isCamAvailable = true;
     }
 
+    /// <summary>
+    /// Updates camera feedback
+    /// </summary>
     private void UpdateCamRenderer() {
         if (!_isCamAvailable) {
             return;
@@ -76,7 +90,7 @@ public class QRCodeScanner : MonoBehaviour
         _aspectRatioFitter.aspectRatio = ratio;
 
         int orientation = -_camTex.videoRotationAngle;
-        _background.rectTransform.localEulerAngles = new Vector3(0, 180, orientation);
+        _background.rectTransform.localEulerAngles = new Vector3(0, 0, orientation);
         // bool mirrored = _camTex.videoVerticallyMirrored;
         // if (mirrored)
         // {
@@ -88,10 +102,23 @@ public class QRCodeScanner : MonoBehaviour
         // }
     }
 
+    /// <summary>
+    /// Scan wrapper function for neatness
+    /// </summary>
     public void OnClickScan() {
         Scan();
     }
 
+    /// <summary>
+    /// Reads in a QR code
+    /// If valid QR code:
+    /// Checks if it is an Osopher
+    /// If true, Adds them to the player Osopher dict and
+    /// Decrements the number of remaining Osophers to scan
+    /// If false, outputs this as feedback
+    /// If invalid QR code:
+    /// Outputs this as feedback
+    /// </summary>
     private void Scan() {
         try {
             IBarcodeReader barcodeReader = new BarcodeReader();
@@ -100,16 +127,43 @@ public class QRCodeScanner : MonoBehaviour
                 // Successfully read QR Code
                 _text.text = result.Text; // change text for debugging
                 // Check if QR Code text is a valid Osopher
-                if (_gameOsopherDict.osopherDict[result.Text]) {
+                if (_gameOsopherDict.FindOsopher(result.Text)) {
                     _playerOsopherDict.AddOsopher(result.Text);
+                    _osopherNum--;
+                    if (_osopherNum == 0) {
+                        _sceneController.GoToNextScene();
+                    }
                 }
+                else {
+                    _text.text = "Invalid Osopher!";
+                }
+                ResetCamera();
             } 
             else {
                 _text.text = "FAILED TO READ QR CODE";
             }
+            Debug.Log(result.Text);
         }
         catch {
             _text.text = "FAILED";
+        }
+    }
+
+    /// <summary>
+    /// Restarts camera on every scan
+    /// Not necessary, used for debugging
+    /// </summary>
+    private void ResetCamera() {
+        _camTex.Stop();
+        _camTex.Play();
+    }
+
+    /// <summary>
+    /// Disables camera after use
+    /// </summary>
+    private void OnDisable() {
+        if (_camTex != null) {
+            _camTex.Stop();
         }
     }
 }
