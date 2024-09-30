@@ -141,7 +141,7 @@ public class QRCodeScanner : MonoBehaviour
                 if (_gameOsopherDict.FindOsopher(result.Text)) {
                     _playerOsopherDict.AddOsopher(result.Text);
                     // Change card panel
-                    //_changeCardPanel.ChangeSprite(_panels[_osopherNum-1], _gameOsopherDict.GetOsopherSO(result.Text));
+                    _changeCardPanel.ChangeSprite(_panels[3-_osopherNum], _gameOsopherDict.GetOsopherSO(result.Text));
                     
                     // Manage scenes using osopher num
                     _osopherNum--;
