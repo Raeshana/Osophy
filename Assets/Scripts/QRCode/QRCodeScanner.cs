@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 using ZXing;
 using TMPro;
 using UnityEngine.UI;
 using Unity.VisualScripting;
-using UnityEngine.UIElements;
 
 public class QRCodeScanner : MonoBehaviour
 {
@@ -28,9 +26,6 @@ public class QRCodeScanner : MonoBehaviour
     [Header("Osopher Settings ----------")]
     [SerializeField]
     private GameOsopherDict _gameOsopherDict; 
-    [SerializeField]
-    private GameObject[] _panels;
-    private ChangeCardPanel _changeCardPanel;
     private int _osopherNum = 3;
 
     [Header("Camera Settings ----------")]
@@ -47,10 +42,6 @@ public class QRCodeScanner : MonoBehaviour
     void Start()
     {
         SetUpCam();
-        _changeCardPanel = GetComponent<ChangeCardPanel>();
-        if (_panels == null || _panels.Length == 0) {
-            Debug.LogError("Panels not set up correctly.");
-        }
     }
 
     /// <summary>
@@ -132,18 +123,12 @@ public class QRCodeScanner : MonoBehaviour
         try {
             IBarcodeReader barcodeReader = new BarcodeReader();
             Result result = barcodeReader.Decode(_camTex.GetPixels32(), _camTex.width, _camTex.height);
-
             if (result != null) {
                 // Successfully read QR Code
                 _text.text = result.Text; // change text for debugging
-
                 // Check if QR Code text is a valid Osopher
                 if (_gameOsopherDict.FindOsopher(result.Text)) {
                     _playerOsopherDict.AddOsopher(result.Text);
-                    // Change card panel
-                    //_changeCardPanel.ChangeSprite(_panels[_osopherNum-1], _gameOsopherDict.GetOsopherSO(result.Text));
-                    
-                    // Manage scenes using osopher num
                     _osopherNum--;
                     if (_osopherNum == 0) {
                         _sceneController.GoToNextScene();

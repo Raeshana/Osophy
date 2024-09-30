@@ -7,6 +7,5 @@ public class OsopherSO : ScriptableObject
 {
     public string osopherName;
     public string osopherTitle;
-    public Sprite osopherImage;
     public QuestionSO[] osopherQuestions;
 }

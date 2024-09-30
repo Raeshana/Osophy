@@ -15,12 +15,7 @@ public class GameOsopherDict : MonoBehaviour
     void Awake() {
         foreach (OsopherSO _osopher in _osopherSOArr) {
             gameOsopherDict.Add(_osopher.osopherName, _osopher);
-<<<<<<< Updated upstream
         }
-=======
-            Debug.Log(_osopher.osopherName);
-    }
->>>>>>> Stashed changes
     }
 
     /// <summary>
