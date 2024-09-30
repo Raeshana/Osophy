@@ -11,13 +11,11 @@ public class GameOsopherDict : MonoBehaviour
 
     /// <summary>
     /// Populates Osopher dict using Osopher Array
-    /// Ensures no kvp are repeated
     /// </summary>
     void Awake() {
         foreach (OsopherSO _osopher in _osopherSOArr) {
-            if (!FindOsopher(_osopher.osopherName)) {
-                gameOsopherDict.Add(_osopher.osopherName, _osopher);
-            }
+            gameOsopherDict.Add(_osopher.osopherName, _osopher);
+            Debug.Log(_osopher.osopherName);
         }
     }
 
