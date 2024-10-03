@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     /// <summary>
-    /// When called, transitions to the next scene in
+    /// When called, transitions to the next scene in 
     /// scene manager
     /// </summary>
     public void GoToNextScene()
@@ -26,6 +26,7 @@ public class SceneController : MonoBehaviour
     public void GoToRightScene(){
         // Ensure RightScene is added to the list of scenes in SceneManager
         // Use SceneManager to navigate to this scene
+        SceneManager.LoadSceneAsync("RightScene");
     }
     
     /// <summary>
@@ -36,5 +37,7 @@ public class SceneController : MonoBehaviour
     public void GoToWrongScene(){
         // Ensure CorrectScene is added to the list of scenes in SceneManager
         // Use SceneManager to navigate to this scene
+        SceneManager.LoadSceneAsync("WrongScene");
+
     }
 }
