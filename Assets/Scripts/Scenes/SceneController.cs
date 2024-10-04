@@ -26,7 +26,7 @@ public class SceneController : MonoBehaviour
     public void GoToRightScene(){
         // Ensure RightScene is added to the list of scenes in SceneManager
         // Use SceneManager to navigate to this scene
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("RightScene");
     }
     
     /// <summary>
@@ -37,7 +37,7 @@ public class SceneController : MonoBehaviour
     public void GoToWrongScene(){
         // Ensure CorrectScene is added to the list of scenes in SceneManager
         // Use SceneManager to navigate to this scene
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("WrongScene");
 
     }
 }
