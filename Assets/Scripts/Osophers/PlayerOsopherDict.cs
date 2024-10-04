@@ -23,9 +23,9 @@ public class PlayerOsopherDict : MonoBehaviour
     /// </summary>
     /// <param name="osopherName"> Name of Osopher you would like to add </param>
     public void AddOsopher(string osopherName) {
-        if (!FindOsopher(osopherName)) {
+        // if (!FindOsopher(osopherName)) {
             osopherDict.Add(osopherName, _gameOsopherDict.GetOsopherSO(osopherName));
-        }
+        // }
     }
 
     /// <summary>

@@ -153,15 +153,15 @@ public class QRCodeScanner : MonoBehaviour
                     _text.text = "Invalid Osopher!";
                 }
                 ResetCamera();
+                Debug.Log(result.Text);
             } 
             else {
                 _text.text = "FAILED TO READ QR CODE";
             }
-            Debug.Log(result.Text);
-        }
-        catch {
-            _text.text = "FAILED";
-        }
+        } catch (Exception ex) {
+            _text.text = "Scan Failed: " + ex.Message;
+            Debug.LogError("Scan Error: " + ex.Message + "\n" + ex.StackTrace);
+    }
     }
 
     /// <summary>
