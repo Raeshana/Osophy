@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b71921278f6b24be193f24b247a8bd9b, type: 3}
-  m_Name: Q3SocratesSO
+  m_Name: Q1DiogenesSO
   m_EditorClassIdentifier: 
-  question: How did Socrates teach his students?
-  rightAnswer: {fileID: 11400000, guid: f3eebe058e59d2e48b64dc549c36c0ad, type: 2}
-  wrongAnswer: {fileID: 11400000, guid: 0e637a6b90ae63a42b794051f1609452, type: 2}
+  question: Diogenes is famous for living like a ___?
+  rightAnswer: {fileID: 11400000, guid: 439b114c8dea5f84fb7c052d30d331ec, type: 2}
+  wrongAnswer: {fileID: 11400000, guid: b6fee0ba7865a8748811fde91949499e, type: 2}

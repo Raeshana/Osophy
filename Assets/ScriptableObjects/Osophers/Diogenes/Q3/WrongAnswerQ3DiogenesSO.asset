@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b022017ee04ffa14d800cf0631e7632f, type: 3}
-  m_Name: RightAnswerQ3SocratesSO
+  m_Name: WrongAnswerQ3DiogenesSO
   m_EditorClassIdentifier: 
-  answer: He asked questions
+  answer: A scroll

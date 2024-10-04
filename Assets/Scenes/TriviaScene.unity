@@ -480,9 +480,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0041b71736ced04ba79475ef08ceb16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionText: {fileID: 2002142869}
-  rightButtonText: {fileID: 1770823327}
-  wrongButtonText: {fileID: 584606281}
+  _questionText: {fileID: 2002142869}
+  _rightButtonText: {fileID: 1770823327}
+  _wrongButtonText: {fileID: 584606281}
   _sceneController: {fileID: 942902299}
   _playerOsopherDict: {fileID: 1907244970}
 --- !u!4 &845855143

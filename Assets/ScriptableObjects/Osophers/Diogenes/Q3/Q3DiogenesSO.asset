@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b71921278f6b24be193f24b247a8bd9b, type: 3}
-  m_Name: Q3SocratesSO
+  m_Name: Q3DiogenesSO
   m_EditorClassIdentifier: 
-  question: How did Socrates teach his students?
-  rightAnswer: {fileID: 11400000, guid: f3eebe058e59d2e48b64dc549c36c0ad, type: 2}
-  wrongAnswer: {fileID: 11400000, guid: 0e637a6b90ae63a42b794051f1609452, type: 2}
+  question: What did Diogenes carry during the day to "look for an honest man"?
+  rightAnswer: {fileID: 11400000, guid: 0a2dade1b20336449950914a46fbbcda, type: 2}
+  wrongAnswer: {fileID: 11400000, guid: 7ae965e02bd1d0f4ba70e3ad35efe186, type: 2}

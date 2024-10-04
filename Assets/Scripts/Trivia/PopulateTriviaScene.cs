@@ -10,16 +10,16 @@ public class PopulateTriviaScene : MonoBehaviour
     [Header("Question Settings ----------")]
     [SerializeField] 
     // private ... Declare the question textbox here
-    private TextMeshProUGUI questionText;
+    private TextMeshProUGUI _questionText;
 
 
     [Header("Button Settings ---------")]
     [SerializeField] 
     // private ... Declare the right button here
-    private TextMeshProUGUI rightButtonText;
+    private TextMeshProUGUI _rightButtonText;
     [SerializeField] 
     // private ... Declare the wrong button here
-    private TextMeshProUGUI wrongButtonText;
+    private TextMeshProUGUI _wrongButtonText;
 
     [Header("Scene Settings ----------")]
     [SerializeField]
@@ -43,7 +43,8 @@ public class PopulateTriviaScene : MonoBehaviour
         // gets osopher "Socrates" and makes an osopher instance (object)
         // "Socrates" is just for alpha testing
         OsopherSO _osopher;
-        _osopher = _playerOsopherDict.GetOsopherSO("Socrates"); 
+        Debug.Log(PlayerDebater.debater);
+        _osopher = _playerOsopherDict.GetOsopherSO(PlayerDebater.debater); 
 
 
         // Get Question
@@ -58,20 +59,20 @@ public class PopulateTriviaScene : MonoBehaviour
         // Populate Question Text
         // Populate the question text with the question text field
         // under QuestionSO under SocratesSO
-        questionText.text = _question.question;
+        _questionText.text = _question.question;
         // questionText.text = "hello there?";
         Debug.Log(_question.question);
 
         // Populate Right Answer Text
         // Populate the right button text with the right answer text field
         // under AnswerSO under _question under _socrates
-        rightButtonText.text = _question.rightAnswer.answer;
+        _rightButtonText.text = _question.rightAnswer.answer;
         Debug.Log(_question.rightAnswer.answer);
 
         // Populate Wrong Answer Text
         // Populate the wrong button text with the wrong answer text field
         // under AnswerSO under _question under _socrates
-        wrongButtonText.text = _question.wrongAnswer.answer;
+        _wrongButtonText.text = _question.wrongAnswer.answer;
         Debug.Log(_question.wrongAnswer.answer);
 
     }

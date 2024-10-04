@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2944402168666343b094893d1789843, type: 3}
+  m_Name: DiogenesSO
+  m_EditorClassIdentifier: 
+  osopherName: Diogenes
+  osopherTitle: '""'
+  osopherImage: {fileID: 21300000, guid: b384f4855c96b6744b0846f24aabe25f, type: 3}
+  osopherQuestions:
+  - {fileID: 11400000, guid: 04fd6d9b4179e1a44a80905ec5a64635, type: 2}
+  - {fileID: 11400000, guid: e001c37b6e3262a468a91b8d86a0f1b0, type: 2}
+  - {fileID: 11400000, guid: b7dd483e6cf677e448ed2c0f2c5e775d, type: 2}

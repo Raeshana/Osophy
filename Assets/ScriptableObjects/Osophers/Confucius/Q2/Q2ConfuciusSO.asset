@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b71921278f6b24be193f24b247a8bd9b, type: 3}
-  m_Name: Q3SocratesSO
+  m_Name: Q2ConfuciusSO
   m_EditorClassIdentifier: 
-  question: How did Socrates teach his students?
-  rightAnswer: {fileID: 11400000, guid: f3eebe058e59d2e48b64dc549c36c0ad, type: 2}
-  wrongAnswer: {fileID: 11400000, guid: 0e637a6b90ae63a42b794051f1609452, type: 2}
+  question: What was Confucius' primary goal in life?
+  rightAnswer: {fileID: 11400000, guid: b66a03654b920d24c95b0d462dcbfc5c, type: 2}
+  wrongAnswer: {fileID: 11400000, guid: 8e0d8ea673c934740803af017f5b3a1c, type: 2}

@@ -11,8 +11,16 @@ public class SceneController : MonoBehaviour
     /// </summary>
     public void GoToNextScene() 
     {
+        StartCoroutine(GoToNextSceneRoutine());
+    }
+
+    private IEnumerator GoToNextSceneRoutine()
+    {
         int current = SceneManager.GetActiveScene().buildIndex;
         int next = current + 1;
+
+        yield return new WaitForSeconds(0.35f);
+
         SceneManager.LoadScene(next, LoadSceneMode.Single);
     }
 

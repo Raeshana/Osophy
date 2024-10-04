@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71921278f6b24be193f24b247a8bd9b, type: 3}
   m_Name: Q1SocratesSO
   m_EditorClassIdentifier: 
-  question: "What is the name of the theorem a\xB2 + b\xB2 = c\xB2?"
+  question: What Ancient Greek playwright had Socrates as a character in his plays?
   rightAnswer: {fileID: 11400000, guid: 185a43862a121e0419d1b6f8adc8f2d2, type: 2}
   wrongAnswer: {fileID: 11400000, guid: 01115a71adffac2419e12c425d1627df, type: 2}

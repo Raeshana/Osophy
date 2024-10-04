@@ -176,7 +176,7 @@ public class QRCodeScanner : MonoBehaviour
             ManageOsopherNum();
         }
         else {
-            _text.text = "Oops! This isn't an Osopher!";
+            _text.text = "Oops! This isn't an Osopher! Scan your Osophers!";
         }
     }
 
@@ -201,11 +201,11 @@ public class QRCodeScanner : MonoBehaviour
                 ManageOsopherNum();
             }   
             else {
-                _text.text = "You don't have this Osopher!";
+                _text.text = "You don't have this Osopher! Scan your Osopher!";
             }
         }
         else {
-            _text.text = "Oops! This isn't an Osopher!";
+            _text.text = "Oops! This isn't an Osopher! Scan your Osopher!";
         }
     }
 
@@ -249,7 +249,7 @@ public class QRCodeScanner : MonoBehaviour
 
                 function(result.Text); // Call InitialScan or GameplayScan
 
-                ResetCamera(); // Reset camera for debugging
+                //ResetCamera(); // Reset camera for debugging
                 //Debug.Log(result.Text);
             } 
             else {
