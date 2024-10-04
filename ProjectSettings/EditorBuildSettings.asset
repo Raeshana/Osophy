@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/InitialQRScanningScene.unity
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
   - enabled: 1
+    path: Assets/Scenes/GameplayQRScanningScene.unity
+    guid: db34efaebbc4fd0418f7e651fcb18868
+  - enabled: 1
     path: Assets/Scenes/TriviaScene.unity
     guid: 3f049e5b60354324fbd11070af36801a
   - enabled: 1

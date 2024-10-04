@@ -11,7 +11,7 @@ public class test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(_playerOsopherDict.FindOsopher("Socrates"));
+        //Debug.Log(_playerOsopherDict.FindOsopher("Socrates"));
     }
     // DO NOT DELETE!!!!!!
 }

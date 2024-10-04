@@ -24,6 +24,8 @@ public class QRCodeScanner : MonoBehaviour
     // Testing Feedback
     [SerializeField]
     private TextMeshProUGUI _text;
+    [SerializeField]
+    private PlayerDebater playerDebater;
 
     [Header("Osopher Settings ----------")]
     [SerializeField]
@@ -31,7 +33,9 @@ public class QRCodeScanner : MonoBehaviour
     [SerializeField]
     private GameObject[] _panels;
     private ChangeCardPanel _changeCardPanel;
-    private int _osopherNum = 3;
+    [SerializeField]
+    private int osopherNum;
+    private int _osopherNumCurr;
 
     [Header("Camera Settings ----------")]
     private bool _isCamAvailable;
@@ -40,6 +44,13 @@ public class QRCodeScanner : MonoBehaviour
     [Header("Scene Settings ----------")]
     [SerializeField]
     private SceneController _sceneController;
+
+    /// <summary>
+    /// Initialize _osopherNumCurr
+    /// </summary>
+    void Awake() {
+        _osopherNumCurr = osopherNum;
+    }
 
     /// <summary>
     /// Sets up the camera
@@ -112,59 +123,6 @@ public class QRCodeScanner : MonoBehaviour
     }
 
     /// <summary>
-    /// Scan wrapper function for neatness
-    /// </summary>
-    public void OnClickScan() {
-        Scan();
-    }
-
-    /// <summary>
-    /// Reads in a QR code
-    /// If valid QR code:
-    /// Checks if it is an Osopher
-    /// If true, Adds them to the player Osopher dict and
-    /// Decrements the number of remaining Osophers to scan
-    /// If false, outputs this as feedback
-    /// If invalid QR code:
-    /// Outputs this as feedback
-    /// </summary>
-    private void Scan() {
-        try {
-            IBarcodeReader barcodeReader = new BarcodeReader();
-            Result result = barcodeReader.Decode(_camTex.GetPixels32(), _camTex.width, _camTex.height);
-
-            if (result != null) {
-                // Successfully read QR Code
-                _text.text = result.Text; // change text for debugging
-
-                // Check if QR Code text is a valid Osopher
-                if (_gameOsopherDict.FindOsopher(result.Text)) {
-                    _playerOsopherDict.AddOsopher(result.Text);
-                    // Change card panel
-                    _changeCardPanel.ChangeSprite(_panels[3-_osopherNum], _gameOsopherDict.GetOsopherSO(result.Text));
-                    
-                    // Manage scenes using osopher num
-                    _osopherNum--;
-                    if (_osopherNum == 0) {
-                        _sceneController.GoToNextScene();
-                    }
-                }
-                else {
-                    _text.text = "Invalid Osopher!";
-                }
-                ResetCamera();
-                Debug.Log(result.Text);
-            } 
-            else {
-                _text.text = "FAILED TO READ QR CODE";
-            }
-        } catch (Exception ex) {
-            _text.text = "Scan Failed: " + ex.Message;
-            Debug.LogError("Scan Error: " + ex.Message + "\n" + ex.StackTrace);
-    }
-    }
-
-    /// <summary>
     /// Restarts camera on every scan
     /// Not necessary, used for debugging
     /// </summary>
@@ -180,5 +138,126 @@ public class QRCodeScanner : MonoBehaviour
         if (_camTex != null) {
             _camTex.Stop();
         }
+    }
+
+    /// <summary>
+    /// Calls this function when scan is clicked during
+    /// inital scanning
+    /// </summary>
+    public void OnlickInitialScan() {
+        Scan(InitialScan);
+    }
+
+    /// <summary>
+    /// Calls this function when scan is clicked during
+    /// gameplay scanning
+    /// </summary>
+    public void OnlickGameplayScan() {
+        Scan(GameplayScan);
+    }
+
+    /// <summary>
+    /// Allows initial scan to be passed as a parameter
+    /// </summary>
+    /// <param name="text"></param>
+    private delegate void InitialScanDelegate(string text);
+
+    /// <summary>
+    /// Called during initial scanning phase
+    /// If an Osopher is valid, 
+    /// Adds them to the player Osopher dict and
+    /// Decrements the number of remaining Osophers to scan
+    /// </summary>
+    /// <param name="text"></param>
+    private void InitialScan(string text) {
+        if (_gameOsopherDict.FindOsopher(text)) {
+            _playerOsopherDict.AddOsopher(text);
+            ChangePanel(text);
+            ManageOsopherNum();
+        }
+        else {
+            _text.text = "Oops! This isn't an Osopher!";
+        }
+    }
+
+    /// <summary>
+    /// Allows gameplay scan to be passed as a parameter
+    /// </summary>
+    /// <param name="text"></param>
+    private delegate void GameplayScanDelegate(string text);
+
+    /// <summary>
+    /// Called during gameplay scan phase
+    /// If an Osopher is valid, 
+    /// 
+    /// Decrements the number of remaining Osophers to scan
+    /// </summary>
+    /// <param name="text"></param>
+    private void GameplayScan(string text) {
+        if (_gameOsopherDict.FindOsopher(text)) {
+            if (_playerOsopherDict.FindOsopher(text)) {
+                playerDebater.AssignDebater(text);
+                ChangePanel(text);
+                ManageOsopherNum();
+            }   
+            else {
+                _text.text = "You don't have this Osopher!";
+            }
+        }
+        else {
+            _text.text = "Oops! This isn't an Osopher!";
+        }
+    }
+
+    /// <summary>
+    /// Change blank panels to scanned Osophers
+    /// </summary>
+    /// <param name="text"> Text read from QR code </param>
+    private void ChangePanel(string text) {
+        _changeCardPanel.ChangeSprite(_panels[osopherNum-_osopherNumCurr], _gameOsopherDict.GetOsopherSO(text));
+    }
+
+    /// <summary>
+    /// Decrement _osopherNum when a valid
+    /// Osopher is scanned in
+    /// If all osophers were scanned, go to next scene
+    /// </summary>
+    private void ManageOsopherNum() {
+        _osopherNumCurr--;
+        if (_osopherNumCurr == 0) {
+            _sceneController.GoToNextScene();
+        }
+    }
+
+    /// <summary>
+    /// Reads in a QR code
+    /// If valid QR code:
+    /// Checks if it is an Osopher
+    /// If true, calls function depending on 
+    /// InitalScanning phase or GameplayScanning phase
+    /// If false, outputs this as feedback
+    /// If invalid QR code:
+    /// Outputs this as feedback
+    /// </summary>
+    private void Scan(InitialScanDelegate function) {
+        try {
+            IBarcodeReader barcodeReader = new BarcodeReader();
+            Result result = barcodeReader.Decode(_camTex.GetPixels32(), _camTex.width, _camTex.height);
+
+            if (result != null) { // Successfully read QR Code
+                _text.text = result.Text; // Change text for debugging
+
+                function(result.Text); // Call InitialScan or GameplayScan
+
+                ResetCamera(); // Reset camera for debugging
+                //Debug.Log(result.Text);
+            } 
+            else {
+                _text.text = "FAILED TO READ QR CODE";
+            }
+        } catch (Exception ex) {
+            _text.text = "Scan Failed: " + ex.Message;
+            Debug.LogError("Scan Error: " + ex.Message + "\n" + ex.StackTrace);
+    }
     }
 }
