@@ -33,7 +33,8 @@ public class PopulateTriviaScene : MonoBehaviour
     void Start()
     {
         // We will use Socrates for testing purposes
-
+        // FOR TESTING:
+        // AddOsopher
         // Get Osopher
         // Declare a OsopherSO _osopher
         // Populate _osopher with SocratesSO from _playerOsopherDict
@@ -58,16 +59,20 @@ public class PopulateTriviaScene : MonoBehaviour
         // Populate the question text with the question text field
         // under QuestionSO under SocratesSO
         questionText.text = _question.question;
+        // questionText.text = "hello there?";
+        Debug.Log(_question.question);
 
         // Populate Right Answer Text
         // Populate the right button text with the right answer text field
         // under AnswerSO under _question under _socrates
         rightButtonText.text = _question.rightAnswer.answer;
+        Debug.Log(_question.rightAnswer.answer);
 
         // Populate Wrong Answer Text
         // Populate the wrong button text with the wrong answer text field
         // under AnswerSO under _question under _socrates
         wrongButtonText.text = _question.wrongAnswer.answer;
+        Debug.Log(_question.wrongAnswer.answer);
 
     }
 }
