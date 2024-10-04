@@ -9,7 +9,7 @@ public class SceneController : MonoBehaviour
     /// When called, transitions to the next scene in 
     /// scene manager
     /// </summary>
-    public void GoToNextScene()
+    public void GoToNextScene() 
     {
         int current = SceneManager.GetActiveScene().buildIndex;
         int next = current + 1;
