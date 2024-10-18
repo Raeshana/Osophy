@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71921278f6b24be193f24b247a8bd9b, type: 3}
+  m_Name: Q1FoucaultSO
+  m_EditorClassIdentifier: 
+  question: Foucault's philosophy focuses on the relationship between ___?
+  rightAnswer: {fileID: 11400000, guid: 01f8d5af1f30248e7a761244d777e9e5, type: 2}
+  wrongAnswer: {fileID: 11400000, guid: db40130dbc7464552979038b2c79278c, type: 2}

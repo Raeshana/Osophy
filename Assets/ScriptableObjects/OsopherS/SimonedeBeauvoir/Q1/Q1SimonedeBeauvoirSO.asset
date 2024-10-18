@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71921278f6b24be193f24b247a8bd9b, type: 3}
+  m_Name: Q1SimonedeBeauvoirSO
+  m_EditorClassIdentifier: 
+  question: Simone de Beauvoir is known for her work on ___?
+  rightAnswer: {fileID: 11400000, guid: dee18e091fab4479aa367cc6feb446d8, type: 2}
+  wrongAnswer: {fileID: 11400000, guid: 63fd24907f0a54bc29c29e75557f7d4d, type: 2}
