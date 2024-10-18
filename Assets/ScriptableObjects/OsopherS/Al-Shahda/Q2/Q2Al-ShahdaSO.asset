@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71921278f6b24be193f24b247a8bd9b, type: 3}
   m_Name: Q2Al-ShahdaSO
   m_EditorClassIdentifier: 
-  question: What was Aristotle's most famous student?
-  rightAnswer: {fileID: 11400000, guid: d9f38fafe567f4d65bb80fcf41ae54c1, type: 2}
-  wrongAnswer: {fileID: 11400000, guid: 9b483761e95f54452a2a4d50679ca17d, type: 2}
+  question: What subject did al-Shahda teach?
+  rightAnswer: {fileID: 11400000, guid: 162c6548932bb4c938d6a4e5693a77d6, type: 2}
+  wrongAnswer: {fileID: 11400000, guid: 09534bccde61947a0a50de8d2d338424, type: 2}

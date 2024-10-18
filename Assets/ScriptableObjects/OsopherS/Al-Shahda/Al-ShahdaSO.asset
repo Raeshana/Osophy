@@ -16,6 +16,6 @@ MonoBehaviour:
   osopherTitle: '""'
   osopherImage: {fileID: 0}
   osopherQuestions:
-  - {fileID: 11400000, guid: 81dea38db382340bda4ce91ad5d21c28, type: 2}
-  - {fileID: 11400000, guid: b9a5a094527c64fb4bfd21e7ca270a1d, type: 2}
-  - {fileID: 11400000, guid: 5944a3ae08335474d813fa7f00b7ca23, type: 2}
+  - {fileID: 11400000, guid: 4c7da61c481fb4a00b7603ac06a09484, type: 2}
+  - {fileID: 11400000, guid: ca9814e28780e4186862b229746b0787, type: 2}
+  - {fileID: 11400000, guid: 82246a603999a4d30ac5cecedd94631d, type: 2}

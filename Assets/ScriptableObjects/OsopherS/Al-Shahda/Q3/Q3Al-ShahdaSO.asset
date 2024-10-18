@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71921278f6b24be193f24b247a8bd9b, type: 3}
   m_Name: Q3Al-ShahdaSO
   m_EditorClassIdentifier: 
-  question: What did Aristotle believe the purpose of life was?
-  rightAnswer: {fileID: 11400000, guid: 51cee0eceaa1d40b682b224763f86ab4, type: 2}
-  wrongAnswer: {fileID: 11400000, guid: dab2dbd8494ec4b089d86edfedc77a9d, type: 2}
+  question: al-Shahda lived during which historical period?
+  rightAnswer: {fileID: 11400000, guid: 8eb5faab45f994272b5cc568a278a03e, type: 2}
+  wrongAnswer: {fileID: 11400000, guid: e9f0a54b5e802445f8f17980999aa379, type: 2}
