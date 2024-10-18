@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2944402168666343b094893d1789843, type: 3}
-  m_Name: YoungPlatoSO
+  m_Name: AdaLovelaceSO
   m_EditorClassIdentifier: 
-  osopherName: Young Plato
+  osopherName: Ada Lovelace
   osopherTitle: '""'
   osopherImage: {fileID: 0}
   osopherQuestions:
-  - {fileID: 11400000, guid: fbd8289cb9a8643d2ae1e3500e881822, type: 2}
-  - {fileID: 11400000, guid: 05255b5b61b14409d9151399432ee85c, type: 2}
-  - {fileID: 11400000, guid: d8cb6af1e96cb47cf9fd402bbc2f6985, type: 2}
+  - {fileID: 11400000, guid: 5768934bf4fd5403db84e5aff5c31b4d, type: 2}
+  - {fileID: 11400000, guid: 666495048fb4c4c439463e1441be64c6, type: 2}
+  - {fileID: 11400000, guid: d3a9447b9f2064caa96f1c05638f1463, type: 2}

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71921278f6b24be193f24b247a8bd9b, type: 3}
+  m_Name: Q1NietzscheSO
+  m_EditorClassIdentifier: 
+  question: Nietzsche famously said "God is ___."
+  rightAnswer: {fileID: 11400000, guid: fd9d3dcb0109b4d179f685f651ba3bb6, type: 2}
+  wrongAnswer: {fileID: 11400000, guid: 2ab7a7990e72b4044b0ddc92fdc0a397, type: 2}

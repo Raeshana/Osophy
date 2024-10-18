@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71921278f6b24be193f24b247a8bd9b, type: 3}
+  m_Name: Q2NietzscheSO
+  m_EditorClassIdentifier: 
+  question: "Nietzsche\u2019s philosophy centers around the concept of ___?"
+  rightAnswer: {fileID: 11400000, guid: d3d8d7e7958064d2a9d3bdafb144a0f9, type: 2}
+  wrongAnswer: {fileID: 11400000, guid: 9a2b31e36e7ff4bf0940543ce0f42f28, type: 2}

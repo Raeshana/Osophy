@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71921278f6b24be193f24b247a8bd9b, type: 3}
+  m_Name: Q3MarieCurieSO
+  m_EditorClassIdentifier: 
+  question: What harmful material did Marie Curie work with?
+  rightAnswer: {fileID: 11400000, guid: ed9af66878b1c439687e8dc19dd4a3e9, type: 2}
+  wrongAnswer: {fileID: 11400000, guid: fafca50ea64e248028e09e75f8349a9f, type: 2}

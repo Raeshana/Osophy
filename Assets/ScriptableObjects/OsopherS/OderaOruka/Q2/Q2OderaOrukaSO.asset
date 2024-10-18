@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71921278f6b24be193f24b247a8bd9b, type: 3}
+  m_Name: Q2OderaOrukaSO
+  m_EditorClassIdentifier: 
+  question: What concept did Oruka develop in African philosophy?
+  rightAnswer: {fileID: 11400000, guid: cbcaf01586bd74e8393f27648a78554f, type: 2}
+  wrongAnswer: {fileID: 11400000, guid: 4a45851e888344a1d9835c8e834be9cc, type: 2}

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71921278f6b24be193f24b247a8bd9b, type: 3}
+  m_Name: Q1AristotleSO
+  m_EditorClassIdentifier: 
+  question: Aristotle is famous for developing which branch of study?
+  rightAnswer: {fileID: 11400000, guid: 8043e2f72e905453a90c270384291194, type: 2}
+  wrongAnswer: {fileID: 11400000, guid: 321941650d5e14d5dab571b4d4effbaf, type: 2}

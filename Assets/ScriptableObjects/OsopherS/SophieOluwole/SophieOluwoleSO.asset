@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2944402168666343b094893d1789843, type: 3}
-  m_Name: YoungPlatoSO
+  m_Name: SophieOluwoleSO
   m_EditorClassIdentifier: 
-  osopherName: Young Plato
+  osopherName: Sophie Oluwole
   osopherTitle: '""'
   osopherImage: {fileID: 0}
   osopherQuestions:
-  - {fileID: 11400000, guid: fbd8289cb9a8643d2ae1e3500e881822, type: 2}
-  - {fileID: 11400000, guid: 05255b5b61b14409d9151399432ee85c, type: 2}
-  - {fileID: 11400000, guid: d8cb6af1e96cb47cf9fd402bbc2f6985, type: 2}
+  - {fileID: 11400000, guid: 6c6ca34369cee4743ab37d7439762202, type: 2}
+  - {fileID: 11400000, guid: a9bb600ffbb2149029e3559d809c7183, type: 2}
+  - {fileID: 11400000, guid: 85aa099aa42c4484a94e812a261a5284, type: 2}

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2944402168666343b094893d1789843, type: 3}
-  m_Name: YoungPlatoSO
+  m_Name: NietzscheSO
   m_EditorClassIdentifier: 
-  osopherName: Young Plato
+  osopherName: Nietzsche
   osopherTitle: '""'
   osopherImage: {fileID: 0}
   osopherQuestions:
-  - {fileID: 11400000, guid: fbd8289cb9a8643d2ae1e3500e881822, type: 2}
-  - {fileID: 11400000, guid: 05255b5b61b14409d9151399432ee85c, type: 2}
-  - {fileID: 11400000, guid: d8cb6af1e96cb47cf9fd402bbc2f6985, type: 2}
+  - {fileID: 11400000, guid: 700fc2aa933d545069398dc785c2c431, type: 2}
+  - {fileID: 11400000, guid: 911d9fa7bf37c4e8bbdd417b100ed2a3, type: 2}
+  - {fileID: 11400000, guid: 8707bd5807b7d40809a3c6ca1e4a4928, type: 2}
