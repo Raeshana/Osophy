@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2944402168666343b094893d1789843, type: 3}
-  m_Name: ZoroasterSO
+  m_Name: ProtagorasSO
   m_EditorClassIdentifier: 
-  osopherName: Zoroaster
+  osopherName: Protagoras
   osopherTitle: '""'
   osopherImage: {fileID: 0}
   osopherQuestions:
-  - {fileID: 11400000, guid: 82385c5b7db7741c5998150399b0724c, type: 2}
-  - {fileID: 11400000, guid: 27f7e1002886548a7a0cdda86afd51ce, type: 2}
-  - {fileID: 11400000, guid: f0231de49e3774046a4becfe5faa901e, type: 2}
+  - {fileID: 11400000, guid: db9057588e994426091dfaa484c18ad5, type: 2}
+  - {fileID: 11400000, guid: d72178a8fe1ff4f8086f590467e92df0, type: 2}
+  - {fileID: 11400000, guid: b2149971b8afe4942a397db55e162920, type: 2}

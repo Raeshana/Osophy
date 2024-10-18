@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b71921278f6b24be193f24b247a8bd9b, type: 3}
-  m_Name: Q3ZoroasterSO
+  m_Name: Q1YoungPlatoSO
   m_EditorClassIdentifier: 
-  question: What is the name of the supreme god in Zoroastrianism?
-  rightAnswer: {fileID: 11400000, guid: c1fde540e60464453b4abbcd111cdff9, type: 2}
-  wrongAnswer: {fileID: 11400000, guid: e3d9eae7505ae4fc7b1c41c4f41035ee, type: 2}
+  question: "What was the name of Plato\u2019s school?"
+  rightAnswer: {fileID: 11400000, guid: 433e10b37f0e44c2c9a381547b6c3877, type: 2}
+  wrongAnswer: {fileID: 11400000, guid: cfc96509de093498b8b2f643a96dcd13, type: 2}
