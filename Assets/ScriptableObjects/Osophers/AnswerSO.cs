@@ -6,6 +6,4 @@ using UnityEngine;
 public class AnswerSO : ScriptableObject
 {  
     public string answer;
-    // public AudioClip soundEffect;
-    // public Animation animation;
 }

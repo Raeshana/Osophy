@@ -62,6 +62,9 @@ public class PopulateTriviaScene : MonoBehaviour
         QuestionSO _question;
         _question = _osopher.osopherQuestions[rand];
 
+        // Update osopher question in player Osopher dict
+        _playerOsopherDict.UpdateOsopherQuestion(_question);
+
         // Populate Question Text
         // Populate the question text with the question text field
         // under QuestionSO under SocratesSO

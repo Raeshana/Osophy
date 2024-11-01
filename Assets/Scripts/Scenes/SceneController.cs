@@ -24,6 +24,10 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(next, LoadSceneMode.Single);
     }
 
+    // public void GoToEngineAnimation() {
+    //     SceneManager.LoadScene("EngineScene", LoadSceneMode.Additive);
+    // }
+
     // DEFINE THE FOLLOWING FUNCTIONS ****************************************************************************
 
     /// <summary>

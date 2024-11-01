@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2944402168666343b094893d1789843, type: 3}
   m_Name: Al-ShahdaSO
   m_EditorClassIdentifier: 
-  osopherName: Al-Shahda
+  osopherName: al-Shahda
   osopherTitle: '""'
   osopherImage: {fileID: 21300000, guid: a093dde6bcdc88a4c86f263535e3a737, type: 3}
   osopherVideo: {fileID: 32900000, guid: 1a29305dc325ff748a6b1a8daaf58afa, type: 3}

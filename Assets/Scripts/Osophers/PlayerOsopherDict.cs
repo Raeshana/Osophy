@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerOsopherDict : MonoBehaviour
 {
     public static Dictionary<string, OsopherSO> osopherDict = new Dictionary<string, OsopherSO>();
+    public static QuestionSO osopherQuestion;
 
     private GameOsopherDict _gameOsopherDict; 
 
@@ -58,6 +59,10 @@ public class PlayerOsopherDict : MonoBehaviour
     /// false otherwise </returns>
     public bool FindOsopher(string osopherName) {
         return osopherDict[osopherName];
+    }
+
+    public void UpdateOsopherQuestion(QuestionSO question) {
+        osopherQuestion = question;
     }
 
     // Currently used for testing
