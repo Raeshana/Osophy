@@ -1366,6 +1366,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 693809825}
     m_Modifications:
     - target: {fileID: 2932267951933023360, guid: c2a980d2a80a59946a8c49f28cbe90a4, type: 3}
+      propertyPath: _remainingTime
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932267951933023360, guid: c2a980d2a80a59946a8c49f28cbe90a4, type: 3}
       propertyPath: sceneController
       value: 
       objectReference: {fileID: 942902299}
