@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2944402168666343b094893d1789843, type: 3}
   m_Name: AmanirenasSO
   m_EditorClassIdentifier: 
-  osopherName: Amanirenas
+  osopherName: Queen Amanirenas
   osopherTitle: '""'
   osopherImage: {fileID: 0}
   osopherQuestions:

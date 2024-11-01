@@ -47,9 +47,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _osopherSOArr:
-  - {fileID: 11400000, guid: 34043a9ac993e3849b7610fc122d831e, type: 2}
-  - {fileID: 11400000, guid: 3b582321afc72364d89eda389b48fd89, type: 2}
+  - {fileID: 11400000, guid: a2bdc6d07c1c546b98022fdc48c9d9ed, type: 2}
+  - {fileID: 11400000, guid: 3c9a9a1f455fa4fdfb9767183c314bc6, type: 2}
+  - {fileID: 11400000, guid: 5862d5792dc4c4ab89bbcae2fe014dc2, type: 2}
+  - {fileID: 11400000, guid: 7b65e53dd05784cc5b73f74e8c8bd804, type: 2}
+  - {fileID: 11400000, guid: 4a5a1e3b4c01b47479ffd3e0f34bc0fa, type: 2}
+  - {fileID: 11400000, guid: 07500db1331384ee7a958ca33bf3e9fc, type: 2}
   - {fileID: 11400000, guid: bcf1f673e0f300944a54c8e77fdedcdc, type: 2}
+  - {fileID: 11400000, guid: 3b582321afc72364d89eda389b48fd89, type: 2}
+  - {fileID: 11400000, guid: e78a5306f51604dcca184b8eb655f6f7, type: 2}
+  - {fileID: 11400000, guid: fb97eeda30f9a4d2e9a2e036914b9d13, type: 2}
+  - {fileID: 11400000, guid: 81fe19bf41c3747009353250baf8f611, type: 2}
+  - {fileID: 11400000, guid: 0166946f8e35a4b00915963378b513fd, type: 2}
+  - {fileID: 11400000, guid: faee50b8e9fd64c8d83ce6bd8bd4226b, type: 2}
+  - {fileID: 11400000, guid: 49b6df77443e64317bee80078acef916, type: 2}
+  - {fileID: 11400000, guid: 548555731cbad4a1ba9b9bf75cc86efe, type: 2}
+  - {fileID: 11400000, guid: ade882c443a1248509044803619b7eba, type: 2}
+  - {fileID: 11400000, guid: 078f823c9048b474bae86764fb37daa2, type: 2}
+  - {fileID: 11400000, guid: 34043a9ac993e3849b7610fc122d831e, type: 2}
+  - {fileID: 11400000, guid: 67ab938f3a4b840ab96dfaee7b26890f, type: 2}
+  - {fileID: 11400000, guid: 607ab42b4d97c4ebd82a9e5e9261618c, type: 2}
+  - {fileID: 11400000, guid: 496b3d4a5fe5b4383afb9f3cbe0c0e65, type: 2}
 --- !u!114 &1165349644393827352
 MonoBehaviour:
   m_ObjectHideFlags: 0
