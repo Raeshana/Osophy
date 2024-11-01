@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   osopherName: Sophie Oluwole
   osopherTitle: '""'
-  osopherImage: {fileID: 0}
+  osopherImage: {fileID: 21300000, guid: 2bf95d8b4b47b284d84d5b899ab1c58d, type: 3}
   osopherQuestions:
   - {fileID: 11400000, guid: 6c6ca34369cee4743ab37d7439762202, type: 2}
   - {fileID: 11400000, guid: a9bb600ffbb2149029e3559d809c7183, type: 2}

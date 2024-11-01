@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   osopherName: Odera Oruka
   osopherTitle: '""'
-  osopherImage: {fileID: 0}
+  osopherImage: {fileID: 21300000, guid: 5e6e843d6dedd2040bc5ea751e9474c2, type: 3}
   osopherQuestions:
   - {fileID: 11400000, guid: a02e02ebb8e1f4f189eaab1f0c0a8dea, type: 2}
   - {fileID: 11400000, guid: 03aa38fa6c7c24eeab8582ddb23b2230, type: 2}

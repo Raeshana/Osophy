@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   osopherName: Nietzsche
   osopherTitle: '""'
-  osopherImage: {fileID: 0}
+  osopherImage: {fileID: 21300000, guid: 9c2fffbc23b3f9247a519a9589399112, type: 3}
   osopherQuestions:
   - {fileID: 11400000, guid: 700fc2aa933d545069398dc785c2c431, type: 2}
   - {fileID: 11400000, guid: 911d9fa7bf37c4e8bbdd417b100ed2a3, type: 2}

@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.UIElements;
+using UnityEngine.Android;
 
 public class QRCodeScanner : MonoBehaviour
 {
@@ -72,11 +73,22 @@ public class QRCodeScanner : MonoBehaviour
         UpdateCamRenderer();
     }
 
+    private void RequestCamPermissions() {
+        // Check if the user has granted camera permission
+        if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
+        {
+            // Request the camera permission
+            Permission.RequestUserPermission(Permission.Camera);
+        }
+    }
+
     /// <summary>
     /// Determines if a camera is available
     /// Plays camera feedback to background
     /// </summary>
     private void SetUpCam() {
+        RequestCamPermissions();
+
         WebCamDevice[] devices = WebCamTexture.devices;
 
         if (devices.Length == 0) {
@@ -86,12 +98,12 @@ public class QRCodeScanner : MonoBehaviour
 
         for (int i = 0; i < devices.Length; i++) {
             // Uncomment for mobile build
-            // if (!devices[i].isFrontFacing) {
-            //     _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
-            // }
+            if (!devices[i].isFrontFacing) {
+                _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
+            }
 
             // Comment for mobile build
-            _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
+            // _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
         }
 
         _camTex.Play();

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   osopherName: Simone de Beauvoir
   osopherTitle: '""'
-  osopherImage: {fileID: 0}
+  osopherImage: {fileID: 21300000, guid: 5953cfe0e43dacb4ead28af7ca87f644, type: 3}
   osopherQuestions:
   - {fileID: 11400000, guid: 92df9b060f7da4258998e132c521a251, type: 2}
   - {fileID: 11400000, guid: 2213d52c0076e46b19accd940f614c92, type: 2}
