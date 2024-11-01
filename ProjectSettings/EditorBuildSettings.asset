@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: a240d4a323a4d1645a419019ab9412d8
+  - enabled: 1
     path: Assets/Scenes/InitialQRScanningScene.unity
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
   - enabled: 1
@@ -24,4 +27,5 @@ EditorBuildSettings:
     path: Assets/Scenes/WrongScene.unity
     guid: 73bdbecb88d5c974c93aa84d8511674e
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: f2a5bc27b8e2ee24f98425be56d5c05a, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: fa6c7d42cf4a5bb41bf9ba95fbf57c24, type: 2}
