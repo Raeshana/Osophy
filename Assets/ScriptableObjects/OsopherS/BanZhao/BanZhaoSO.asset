@@ -15,6 +15,7 @@ MonoBehaviour:
   osopherName: Ban Zhao
   osopherTitle: '""'
   osopherImage: {fileID: 21300000, guid: ecc51bc65c0c86c46a6f2102cf11c857, type: 3}
+  osopherVideo: {fileID: 32900000, guid: 35d774e73cbeaff4bb59656115bff206, type: 3}
   osopherQuestions:
   - {fileID: 11400000, guid: ca05f941dc16948dd96816d8ea32431f, type: 2}
   - {fileID: 11400000, guid: 76a69d5eb1c354750b66abb91f7b4c52, type: 2}

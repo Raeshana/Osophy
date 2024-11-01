@@ -15,6 +15,7 @@ MonoBehaviour:
   osopherName: Confucius
   osopherTitle: The Sage
   osopherImage: {fileID: 21300000, guid: 1286d1df39329f1488688f8d03851e13, type: 3}
+  osopherVideo: {fileID: 32900000, guid: 994c4ba442b4d1a40a5a980235541ff9, type: 3}
   osopherQuestions:
   - {fileID: 11400000, guid: 475aafc4ae7a98748837f1f30343c0cc, type: 2}
   - {fileID: 11400000, guid: 2247b4209de720944b1a5352e6f96111, type: 2}

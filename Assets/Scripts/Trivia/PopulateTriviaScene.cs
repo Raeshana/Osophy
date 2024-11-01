@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Video;
 
 public class PopulateTriviaScene : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class PopulateTriviaScene : MonoBehaviour
     [Header("Scene Settings ----------")]
     [SerializeField]
     private SceneController _sceneController;
+    [SerializeField]
+    private VideoPlayer _videoPlayer;
 
     [Header("Player Settings ----------")]
     [SerializeField]
@@ -45,6 +48,9 @@ public class PopulateTriviaScene : MonoBehaviour
         OsopherSO _osopher;
         Debug.Log(PlayerDebater.debater);
         _osopher = _playerOsopherDict.GetOsopherSO(PlayerDebater.debater); 
+
+        // Update background
+        _videoPlayer.clip = _osopher.osopherVideo;
 
 
         // Get Question
