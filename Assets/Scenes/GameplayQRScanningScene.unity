@@ -536,6 +536,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CardPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 5120025133073338226, guid: d4711d490d7de244cbbc7a5ee6751d77, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
