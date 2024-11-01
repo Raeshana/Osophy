@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   osopherName: Carlos Castaneda
   osopherTitle: '""'
-  osopherImage: {fileID: 0}
+  osopherImage: {fileID: 21300000, guid: 3af27f513726c4a42a4ab1f78c4b8a4b, type: 3}
   osopherQuestions:
   - {fileID: 11400000, guid: 125401c4b0987478aab3d988494cb44a, type: 2}
   - {fileID: 11400000, guid: 657f0d41505404dedb98d4736b70441b, type: 2}

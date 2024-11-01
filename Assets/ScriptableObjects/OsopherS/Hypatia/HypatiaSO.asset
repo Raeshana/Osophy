@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   osopherName: Hypatia
   osopherTitle: '""'
-  osopherImage: {fileID: 0}
+  osopherImage: {fileID: 21300000, guid: b5a92f07ad73f7449a2e783d17588870, type: 3}
   osopherQuestions:
   - {fileID: 11400000, guid: 138732174a609424e90560f2d4eba5bd, type: 2}
   - {fileID: 11400000, guid: 71152c30483504e5988e8593d391a858, type: 2}

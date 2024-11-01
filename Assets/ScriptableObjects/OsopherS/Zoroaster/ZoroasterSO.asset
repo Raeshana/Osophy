@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   osopherName: Zoroaster
   osopherTitle: '""'
-  osopherImage: {fileID: 0}
+  osopherImage: {fileID: 21300000, guid: 14e4eacfa86a7aa41bad7c8dcde04ed2, type: 3}
   osopherQuestions:
   - {fileID: 11400000, guid: 82385c5b7db7741c5998150399b0724c, type: 2}
   - {fileID: 11400000, guid: 27f7e1002886548a7a0cdda86afd51ce, type: 2}
