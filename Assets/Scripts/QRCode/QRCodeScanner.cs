@@ -97,13 +97,13 @@ public class QRCodeScanner : MonoBehaviour
         }
 
         for (int i = 0; i < devices.Length; i++) {
-            // // Uncomment for mobile build
+            // Uncomment for mobile build
             if (!devices[i].isFrontFacing) {
                 _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
             }
 
             // Comment for mobile build
-            // _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
+            // _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width*2, (int)_scanZone.rect.height*2);
         }
 
         _camTex.Play();
@@ -188,7 +188,7 @@ public class QRCodeScanner : MonoBehaviour
             ManageOsopherNum();
         }
         else {
-            _text.text = "Oops! This isn't an Osopher! Scan your Osophers!";
+            _text.text = "Oops! This isn't an Osopher!";
         }
     }
 
@@ -213,11 +213,11 @@ public class QRCodeScanner : MonoBehaviour
                 ManageOsopherNum();
             }   
             else {
-                _text.text = "You don't have this Osopher! Scan your Osopher!";
+                _text.text = "Oops! You don't have this Osopher!";
             }
         }
         else {
-            _text.text = "Oops! This isn't an Osopher! Scan your Osopher!";
+            _text.text = "Oops! This isn't an Osopher!";
         }
     }
 
@@ -265,10 +265,10 @@ public class QRCodeScanner : MonoBehaviour
                 //Debug.Log(result.Text);
             } 
             else {
-                _text.text = "FAILED TO READ QR CODE";
+                _text.text = "Oops! Scan again!";
             }
         } catch (Exception ex) {
-            _text.text = "Scan Failed: " + ex.Message;
+            _text.text = "Oops! " + ex.Message;
             Debug.LogError("Scan Error: " + ex.Message + "\n" + ex.StackTrace);
     }
     }
