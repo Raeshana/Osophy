@@ -48,4 +48,12 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene("WrongScene");
 
     }
+
+    public void GoToLobby(){
+        SceneManager.LoadScene("Lobby");
+    }
+
+    public void GoToJoinLobby(){
+        SceneManager.LoadScene("JoinLobby");
+    }
 }
