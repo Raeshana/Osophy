@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Services.Authentication;
@@ -26,6 +27,12 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] 
     private TMP_Text _feedback;
 
+    public event EventHandler<LobbyEventArgs> OnJoinedLobby;
+
+    public class LobbyEventArgs : EventArgs {
+        public Lobby lobby { get; set; }
+    }
+
     private SceneController _sceneController;
 
     void Awake() {
@@ -53,7 +60,7 @@ public class LobbyManager : MonoBehaviour
         };
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
-        _playerName = "Beans" + UnityEngine.Random.Range(10,99);
+        _playerName = "Player" + UnityEngine.Random.Range(10,99);
         Debug.Log(_playerName);
     }
 
@@ -81,8 +88,14 @@ public class LobbyManager : MonoBehaviour
                 float lobbyUpdateTimerMax = 1.1f;
                 _lobbyUpdateTimer = lobbyUpdateTimerMax;
 
+                // Poll for lobby updates
                 Lobby lobby = await LobbyService.Instance.GetLobbyAsync(_joinedLobby.Id);
-                _joinedLobby = lobby;
+                //_joinedLobby = lobby;
+                if (lobby != null && _joinedLobby.Players.Count != lobby.Players.Count) {
+                    // Trigger UI update when players count changes
+                    _joinedLobby = lobby;
+                    OnJoinedLobby?.Invoke(this, new LobbyManager.LobbyEventArgs { lobby = _joinedLobby });
+                }
             }
         }
     }
@@ -108,12 +121,20 @@ public class LobbyManager : MonoBehaviour
             _feedback.text = "Created Lobby " + lobby.Name;
             Debug.Log("Created Lobby!" + lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Id + " " + lobby.LobbyCode);
             
-            PrintPlayers(_hostLobby);
-            IsLobbyReady = true;  // Set the flag to indicate that the lobby data is now available
-            _sceneController.GoToLobby();
+            PrintPlayers(lobby);
+            IsLobbyReady = true;  // Now that the lobby is created, flag is set to ready
+            _sceneController.GoToLobby();  // Proceed to lobby scene
+            StartCoroutine(InvokeEventInNewScene());
         } catch (LobbyServiceException e) {
             Debug.Log(e);
         }
+    }
+
+    private IEnumerator InvokeEventInNewScene() {
+        // Wait until the next frame to allow the scene to load and the listener to be ready
+        yield return null;
+        // Now invoke the event
+        OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
     }
 
     public async void ListLobbies() {
@@ -154,10 +175,9 @@ public class LobbyManager : MonoBehaviour
             _feedback.text = "Joined Lobby " + lobby.Name;
             Debug.Log("Joined Lobby with code" + lobbyCode);
 
-            IsLobbyReady = true;  // Set the flag to indicate that the lobby data is now available
-
-            PrintPlayers(_joinedLobby);
-            _sceneController.GoToLobby();
+            IsLobbyReady = true;  // Flag set after the lobby is joined
+            _sceneController.GoToLobby();  // Transition to lobby scene
+           StartCoroutine(InvokeEventInNewScene());
         } catch (LobbyServiceException e) {
             Debug.LogError(e);
         }

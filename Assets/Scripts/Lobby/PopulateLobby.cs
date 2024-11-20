@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using Unity.Services.Lobbies.Models;
 
 public class PopulateLobby : MonoBehaviour
 {
@@ -31,15 +32,27 @@ public class PopulateLobby : MonoBehaviour
             yield return null;  // Wait for the next frame before checking again
         }
 
-        // Once the data is ready, update the lobby display
-        UpdateLobbyDisplay();
+        // Once the data is ready, subscribe to the OnJoinedLobby event
+        lobbyManager.OnJoinedLobby += HandleLobbyJoined;
     }
 
-    private void UpdateLobbyDisplay() {
+    private void HandleLobbyJoined(object sender, LobbyManager.LobbyEventArgs e) {
+        // Update the UI when the player joins the lobby
+        UpdateLobbyDisplay(e.lobby);
+    }
+
+    private void UpdateLobbyDisplay(Lobby lobby) {
         // Display player profiles
-        lobbyManager.DisplayPlayers(lobbyManager._hostLobby, _profiles, _names);
+        lobbyManager.DisplayPlayers(lobby, _profiles, _names);
 
-        // Set join code
-        _code.text = lobbyManager._joinedLobby.LobbyCode;
+        // Set the join code
+        _code.text = lobby.LobbyCode;
     }
+
+     private void OnDestroy() {
+        // Unsubscribe to prevent memory leaks
+        if (lobbyManager != null) {
+            lobbyManager.OnJoinedLobby -= HandleLobbyJoined;
+        }
+     }
 }
