@@ -7,14 +7,11 @@ using UnityEngine.UI;
 
 public class EditPlayerName : MonoBehaviour {
 
-
     public static EditPlayerName Instance { get; private set; }
-
 
     public event EventHandler OnNameChanged;
 
-
-    private string playerName = "Code Monkey";
+    private string _playerName = "Code Monkey";
 
     public void ClickButton() {
         OnNameChanged?.Invoke(this, EventArgs.Empty);
@@ -29,7 +26,7 @@ public class EditPlayerName : MonoBehaviour {
     }
 
     public string GetPlayerName() {
-        return playerName;
+        return _playerName;
     }
 
 

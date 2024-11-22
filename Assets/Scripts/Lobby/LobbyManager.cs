@@ -191,13 +191,13 @@ public class LobbyManager : MonoBehaviour
     private Player AddPlayer() {
         return new Player {
             Data = new Dictionary<string, PlayerDataObject> {
-                {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, _playerName)}
-                // {"Osopher1", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
-                // {"Osopher2", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
-                // {"Osopher3", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
-                // {"Debater", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
-                // {"isSpectator", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
-                // {"isAlive", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")}
+                {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, _playerName)},
+                {"Osopher1", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
+                {"Osopher2", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
+                {"Osopher3", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
+                {"Debater", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
+                {"isSpectator", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
+                {"isAlive", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "true")}
             }
         };
     }
@@ -214,7 +214,14 @@ public class LobbyManager : MonoBehaviour
     public void PrintPlayers(Lobby lobby) {
         Debug.Log("Players in Lobby " + lobby.Name + " " + lobby.Data["RoundNumber"].Value);
         foreach(Player player in lobby.Players) {
-            Debug.Log(player.Id + " " + player.Data["PlayerName"].Value);
+            Debug.Log("Player ID: " + player.Id); 
+            Debug.Log("Player Name: " + player.Data["PlayerName"].Value);
+            Debug.Log("Osopher 1: " + player.Data["Osopher1"].Value);
+            Debug.Log("Osopher 2: " + player.Data["Osopher2"].Value);
+            Debug.Log("Osopher 3: " + player.Data["Osopher3"].Value);
+            Debug.Log("Player Debater: " + player.Data["Debater"].Value);
+            Debug.Log("isSpectator: " + player.Data["isSpectator"].Value);
+            Debug.Log("isAlive: " + player.Data["isAlive"].Value);
         }
     }
 
@@ -227,6 +234,7 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
+    // REDO
     private async void UpdateLobbyRound(string round) {
         try {
             _hostLobby = await Lobbies.Instance.UpdateLobbyAsync(_hostLobby.Id, new UpdateLobbyOptions {
@@ -254,6 +262,114 @@ public class LobbyManager : MonoBehaviour
                         "PlayerName", new PlayerDataObject(
                             visibility: PlayerDataObject.VisibilityOptions.Public,
                             value: newPlayerName)
+                    }
+                };
+
+                string playerId = AuthenticationService.Instance.PlayerId;
+                Lobby lobby = await LobbyService.Instance.UpdatePlayerAsync(_joinedLobby.Id, playerId, options);
+                _joinedLobby = lobby;
+
+                OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+            } catch (LobbyServiceException e) {
+                Debug.Log(e); 
+            }   
+        }
+    }
+
+    public async void UpdatePlayerOsophers(string osopher1,
+                                            string osopher2,
+                                            string osopher3) {
+        if (_joinedLobby != null) {
+            try {
+                UpdatePlayerOptions options = new UpdatePlayerOptions();
+
+                options.Data = new Dictionary<string, PlayerDataObject>() {
+                    {
+                        "Osopher1", new PlayerDataObject(
+                            visibility: PlayerDataObject.VisibilityOptions.Public,
+                            value: osopher1)
+                    },
+                    {
+                        "Osopher2", new PlayerDataObject(
+                            visibility: PlayerDataObject.VisibilityOptions.Public,
+                            value: osopher2)
+                    },
+                    {
+                        "Osopher3", new PlayerDataObject(
+                            visibility: PlayerDataObject.VisibilityOptions.Public,
+                            value: osopher3)
+                    }
+                };
+
+                string playerId = AuthenticationService.Instance.PlayerId;
+                Lobby lobby = await LobbyService.Instance.UpdatePlayerAsync(_joinedLobby.Id, playerId, options);
+                _joinedLobby = lobby;
+
+                OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+            } catch (LobbyServiceException e) {
+                Debug.Log(e); 
+            }   
+        }
+    }
+
+    public async void UpdatePlayerDebater(string debater) {
+        if (_joinedLobby != null) {
+            try {
+                UpdatePlayerOptions options = new UpdatePlayerOptions();
+
+                options.Data = new Dictionary<string, PlayerDataObject>() {
+                    {
+                        "Debater", new PlayerDataObject(
+                            visibility: PlayerDataObject.VisibilityOptions.Public,
+                            value: debater)
+                    }
+                };
+
+                string playerId = AuthenticationService.Instance.PlayerId;
+                Lobby lobby = await LobbyService.Instance.UpdatePlayerAsync(_joinedLobby.Id, playerId, options);
+                _joinedLobby = lobby;
+
+                OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+            } catch (LobbyServiceException e) {
+                Debug.Log(e); 
+            }   
+        }
+    }
+
+    public async void UpdatePlayerSpectatorStatus(string isSpectator) {
+        if (_joinedLobby != null) {
+            try {
+                UpdatePlayerOptions options = new UpdatePlayerOptions();
+
+                options.Data = new Dictionary<string, PlayerDataObject>() {
+                    {
+                        "isSpectator", new PlayerDataObject(
+                            visibility: PlayerDataObject.VisibilityOptions.Public,
+                            value: isSpectator)
+                    }
+                };
+
+                string playerId = AuthenticationService.Instance.PlayerId;
+                Lobby lobby = await LobbyService.Instance.UpdatePlayerAsync(_joinedLobby.Id, playerId, options);
+                _joinedLobby = lobby;
+
+                OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+            } catch (LobbyServiceException e) {
+                Debug.Log(e); 
+            }   
+        }
+    }
+
+    public async void UpdatePlayerAliveStatus(string isAlive) {
+        if (_joinedLobby != null) {
+            try {
+                UpdatePlayerOptions options = new UpdatePlayerOptions();
+
+                options.Data = new Dictionary<string, PlayerDataObject>() {
+                    {
+                        "isAlive", new PlayerDataObject(
+                            visibility: PlayerDataObject.VisibilityOptions.Public,
+                            value: isAlive)
                     }
                 };
 
