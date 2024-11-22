@@ -405,7 +405,11 @@ public class LobbyManager : MonoBehaviour
             int randomIndex = UnityEngine.Random.Range(0, players.Count);
 
             // Select a random player
-            return players[randomIndex].Id;
+            string player1 = players[randomIndex].Id;
+
+            UpdatePlayer1(player1);
+
+            return player1;
         }
         else
         {

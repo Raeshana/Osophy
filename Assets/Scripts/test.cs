@@ -25,4 +25,8 @@ public class test : MonoBehaviour
     private void LobbyManager_OnJoinedLobbyUpdate(object sender, LobbyManager.LobbyEventArgs e) {
         lobbyManager.PrintPlayers(e.lobby); 
     }
+
+    public void ListLobbies() {
+        lobbyManager.ListLobbies();
+    }
 }
