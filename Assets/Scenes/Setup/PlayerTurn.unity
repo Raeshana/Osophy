@@ -271,7 +271,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 390583938}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 815f7149b482166449558bc54d9c5b2a, type: 3}
+  m_Script: {fileID: 11500000, guid: b9c8f56f6cd8ddd49aa3c372dd390584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &484798401
@@ -505,7 +505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5808827939922246164, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ChooseOpponentButton, Assembly-CSharp
+      value: ChooseOpponentScene, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8552726776326921273, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
       propertyPath: m_Pivot.x

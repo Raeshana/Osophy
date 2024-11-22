@@ -98,12 +98,12 @@ public class QRCodeScanner : MonoBehaviour
 
         for (int i = 0; i < devices.Length; i++) {
             // Uncomment for mobile build
-            // if (!devices[i].isFrontFacing) {
-            //     _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
-            // }
+            if (!devices[i].isFrontFacing) {
+                _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
+            }
 
             // Comment for mobile build
-            _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
+            // _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
         }
 
         _camTex.Play();

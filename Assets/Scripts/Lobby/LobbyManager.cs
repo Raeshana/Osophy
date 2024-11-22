@@ -472,6 +472,7 @@ public class LobbyManager : MonoBehaviour
                 _joinedLobby = lobby;
 
                 OnChoosePlayers?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+                StartCoroutine(GoToChooseOpponentRoutine());
             }
             else
             {
@@ -519,6 +520,11 @@ public class LobbyManager : MonoBehaviour
         } catch (LobbyServiceException e) {
             Debug.Log(e);
         }
+    }
+
+    private IEnumerator GoToChooseOpponentRoutine() {
+        yield return new WaitForSeconds(2);
+        GoToChooseOpponent();
     }
 
     public void GoToChooseOpponent() {

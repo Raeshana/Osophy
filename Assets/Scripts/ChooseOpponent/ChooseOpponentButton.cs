@@ -5,7 +5,17 @@ using UnityEngine;
 
 public class ChooseOpponentButton : MonoBehaviour
 {
+    private StoreOpponentID _storeOpponentID;
+    private string _opponentID;
+
+    private LobbyManager _lobbyManager;
+
+    void Awake() {
+        _storeOpponentID = GetComponent<StoreOpponentID>();
+        _opponentID = _storeOpponentID.opponentID;
+    }
+
     public void ClickButton() {
-        LobbyManager.Instance.GoToChooseOpponent();
+        _lobbyManager.UpdatePlayer2(_opponentID);
     }
 }
