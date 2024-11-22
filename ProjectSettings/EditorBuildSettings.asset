@@ -36,6 +36,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Setup/VersusScene.unity
     guid: 80006470e0e440d49a02fb7fc88f92ed
   - enabled: 1
+    path: Assets/Scenes/Setup/SpectatorScene.unity
+    guid: bd4804b0e59fe5044bd9b3ce44fa2293
+  - enabled: 1
     path: Assets/Scenes/Setup/GameplayQRScanningScene.unity
     guid: db34efaebbc4fd0418f7e651fcb18868
   - enabled: 1

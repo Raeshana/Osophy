@@ -11,6 +11,7 @@ public class ChooseOpponentButton : MonoBehaviour
     private LobbyManager _lobbyManager;
 
     void Awake() {
+        _lobbyManager = GameObject.FindWithTag("LobbyManager").GetComponent<LobbyManager>();
         _storeOpponentID = GetComponent<StoreOpponentID>();
         _opponentID = _storeOpponentID.opponentID;
     }
