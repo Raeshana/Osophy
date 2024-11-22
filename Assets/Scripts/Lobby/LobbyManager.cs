@@ -155,7 +155,7 @@ public class LobbyManager : MonoBehaviour
 
             Debug.Log("Lobbies found: " + queryResponse.Results.Count);
             foreach(Lobby lobby in queryResponse.Results) {
-                Debug.Log(lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Data["GameMode"].Value);
+                Debug.Log(lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Data["RoundNumber"].Value);
                 PrintPlayers(lobby);
             }
         } catch (LobbyServiceException e) {
@@ -188,7 +188,13 @@ public class LobbyManager : MonoBehaviour
     private Player AddPlayer() {
         return new Player {
             Data = new Dictionary<string, PlayerDataObject> {
-                {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, _playerName)}
+                {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, _playerName)},
+                {"Osopher1", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, "")},
+                {"Osopher2", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, "")},
+                {"Osopher3", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, "")},
+                {"Debater", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, "")},
+                {"isSpectator", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, "")},
+                {"isAlive", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, "")}
             }
         };
     }
@@ -203,7 +209,7 @@ public class LobbyManager : MonoBehaviour
     }
 
     public void PrintPlayers(Lobby lobby) {
-        Debug.Log("Players in Lobby " + lobby.Name + " " + lobby.Data["GameMode"].Value + " " + lobby.Data["Map"].Value);
+        Debug.Log("Players in Lobby " + lobby.Name + " " + lobby.Data["RoundNumber"].Value);
         foreach(Player player in lobby.Players) {
             Debug.Log(player.Id + " " + player.Data["PlayerName"].Value);
         }
