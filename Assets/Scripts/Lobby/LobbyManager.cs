@@ -29,6 +29,7 @@ public class LobbyManager : MonoBehaviour
 
     public event EventHandler<LobbyEventArgs> OnJoinedLobby;
     public event EventHandler<LobbyEventArgs> OnJoinedLobbyUpdate;
+    public event EventHandler<LobbyEventArgs> OnChoosePlayers;
 
     public class LobbyEventArgs : EventArgs {
         public Lobby lobby { get; set; }
@@ -91,13 +92,22 @@ public class LobbyManager : MonoBehaviour
 
                 // Poll for lobby updates
                 Lobby lobby = await LobbyService.Instance.GetLobbyAsync(_joinedLobby.Id);
-                _joinedLobby = lobby;
 
                 if (lobby != null && _joinedLobby.Players.Count != lobby.Players.Count) {
                     // Trigger UI update when players count changes
+                    _joinedLobby = lobby;
                     OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
                 }
 
+                if (lobby != null && 
+                    (_joinedLobby.Data["Player1"].Value != lobby.Data["Player1"].Value ||
+                    _joinedLobby.Data["Player2"].Value != lobby.Data["Player2"].Value)) {
+                    // Trigger UI update when players count changes
+                    _joinedLobby = lobby;
+                    OnChoosePlayers?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+                }
+
+                _joinedLobby = lobby;
                 OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
             }
         }
@@ -126,7 +136,7 @@ public class LobbyManager : MonoBehaviour
             _feedback.text = "Created Lobby " + lobby.Name;
             Debug.Log("Created Lobby!" + lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Id + " " + lobby.LobbyCode);
             
-            PrintPlayers(lobby);
+            //PrintPlayers(lobby);
             IsLobbyReady = true;  // Now that the lobby is created, flag is set to ready
             _sceneController.GoToLobby();  // Proceed to lobby scene
             StartCoroutine(InvokeEventInNewScene());
@@ -158,8 +168,8 @@ public class LobbyManager : MonoBehaviour
 
             Debug.Log("Lobbies found: " + queryResponse.Results.Count);
             foreach(Lobby lobby in queryResponse.Results) {
-                Debug.Log(lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Data["RoundNumber"].Value);
-                PrintPlayers(lobby);
+                Debug.Log(lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Data["RoundNumber"].Value + lobby.Data["Player1"].Value);
+                //PrintPlayers(lobby);
             }
         } catch (LobbyServiceException e) {
             Debug.Log(e);
@@ -245,7 +255,7 @@ public class LobbyManager : MonoBehaviour
 
             _joinedLobby = _hostLobby;
 
-            PrintPlayers(_hostLobby);
+            //PrintPlayers(_hostLobby);
         } catch (LobbyServiceException e) {
             Debug.Log(e);
         }
@@ -384,6 +394,59 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
+    public string ChoosePlayer1()
+    {
+        if (_joinedLobby != null && _joinedLobby.Players.Count > 0)
+        {
+            // Get all players
+            List<Player> players = _joinedLobby.Players;
+
+            // Generate a random index
+            int randomIndex = UnityEngine.Random.Range(0, players.Count);
+
+            // Select a random player
+            return players[randomIndex].Id;
+        }
+        else
+        {
+            Debug.LogWarning("No players in the lobby to select from!");
+            return null;
+        }
+    }
+
+    public async void UpdatePlayer1(string player1) {
+        try {            
+            Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(_joinedLobby.Id, new UpdateLobbyOptions {
+                Data = new Dictionary<string, DataObject> {
+                    { "Player1", new DataObject(DataObject.VisibilityOptions.Public, player1) }
+                }
+            });
+
+            _joinedLobby = lobby;
+
+            OnChoosePlayers?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+        } catch (LobbyServiceException e) {
+            Debug.Log(e);
+        }
+    }
+
+    public async void UpdatePlayer2(string player2) {
+        try {            
+            Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(_joinedLobby.Id, new UpdateLobbyOptions {
+                Data = new Dictionary<string, DataObject> {
+                    { "Player2", new DataObject(DataObject.VisibilityOptions.Public, player2) }
+                }
+            });
+
+            _joinedLobby = lobby;
+
+            OnChoosePlayers?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+        } catch (LobbyServiceException e) {
+            Debug.Log(e);
+        }
+    }
+
+
     private void LeaveLobby() {
         try {
             LobbyService.Instance.RemovePlayerAsync(_joinedLobby.Id, AuthenticationService.Instance.PlayerId);
@@ -408,7 +471,7 @@ public class LobbyManager : MonoBehaviour
 
             _joinedLobby = _hostLobby;
 
-            PrintPlayers(_hostLobby);
+            //PrintPlayers(_hostLobby);
         } catch (LobbyServiceException e) {
             Debug.Log(e);
         }

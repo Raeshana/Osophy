@@ -28,6 +28,4 @@ public class EditPlayerName : MonoBehaviour {
     public string GetPlayerName() {
         return _playerName;
     }
-
-
 }

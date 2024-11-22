@@ -14,7 +14,7 @@ public class PlayerOsopherDict : MonoBehaviour
 
     public event EventHandler OnAddOsopher;
 
-    List<string> osophers = new List<string>();
+    private List<string> _osophers = new List<string>();
 
     /// <summary>
     /// Initializes the gameObject that GameOsopherDict is attached to
@@ -37,7 +37,7 @@ public class PlayerOsopherDict : MonoBehaviour
     public void AddOsopher(string osopherName) {
         // if (!FindOsopher(osopherName)) {
             osopherDict.Add(osopherName, _gameOsopherDict.GetOsopherSO(osopherName));
-            osophers.Add(osopherName);
+            _osophers.Add(osopherName);
         // }
     }
 
@@ -46,7 +46,7 @@ public class PlayerOsopherDict : MonoBehaviour
     }
 
     private void HandleOnAddOsopher(object sender, EventArgs e) {
-        LobbyManager.Instance.UpdatePlayerOsophers(osophers[0], osophers[1], osophers[2]);
+        LobbyManager.Instance.UpdatePlayerOsophers(_osophers[0], _osophers[1], _osophers[2]);
     }
 
     /// <summary>

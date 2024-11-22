@@ -237,9 +237,14 @@ public class QRCodeScanner : MonoBehaviour
     private void ManageOsopherNum() {
         _osopherNumCurr--;
         if (_osopherNumCurr == 0) {
-            //_sceneController.GoToNextScene();
             _playerOsopherDict.UpdatePlayerOsophers();
+            StartCoroutine(WaitForPlayerUpdates());
         }
+    }
+
+    private IEnumerator WaitForPlayerUpdates() {
+        yield return new WaitForSeconds(2);
+        _sceneController.GoToNextScene();
     }
 
     /// <summary>

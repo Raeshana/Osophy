@@ -49,10 +49,10 @@ public class PopulateLobby : MonoBehaviour
         _code.text = lobby.LobbyCode;
     }
 
-     private void OnDestroy() {
+    private void OnDestroy() {
         // Unsubscribe to prevent memory leaks
         if (lobbyManager != null) {
             lobbyManager.OnJoinedLobby -= HandleLobbyJoined;
         }
-     }
+    }
 }

@@ -24,6 +24,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Setup/InitialQRScanningScene.unity
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
   - enabled: 1
+    path: Assets/Scenes/Setup/PlayerTurn.unity
+    guid: 9c6b7840294cccc4c9d60fdaa5c6ed74
+  - enabled: 1
+    path: Assets/Scenes/Setup/ChooseOpponent.unity
+    guid: 04bf9100a0658394cbe6bd1d404c000d
+  - enabled: 1
+    path: Assets/Scenes/Setup/ChooseOpponentSpectator.unity
+    guid: 261647372325cd64f879a57f5c7733e8
+  - enabled: 1
+    path: Assets/Scenes/Setup/VersusScene.unity
+    guid: 80006470e0e440d49a02fb7fc88f92ed
+  - enabled: 1
     path: Assets/Scenes/Setup/GameplayQRScanningScene.unity
     guid: db34efaebbc4fd0418f7e651fcb18868
   - enabled: 1
