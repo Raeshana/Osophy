@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerOsopherDict : MonoBehaviour
 {
@@ -9,11 +12,19 @@ public class PlayerOsopherDict : MonoBehaviour
 
     private GameOsopherDict _gameOsopherDict; 
 
+    public event EventHandler OnAddOsopher;
+
+    List<string> osophers = new List<string>();
+
     /// <summary>
     /// Initializes the gameObject that GameOsopherDict is attached to
     /// </summary>
     void Awake() {
         _gameOsopherDict = gameObject.GetComponent<GameOsopherDict>();
+    }
+
+    void Start() {
+        OnAddOsopher += HandleOnAddOsopher;
     }
 
     /// <summary>
@@ -26,7 +37,16 @@ public class PlayerOsopherDict : MonoBehaviour
     public void AddOsopher(string osopherName) {
         // if (!FindOsopher(osopherName)) {
             osopherDict.Add(osopherName, _gameOsopherDict.GetOsopherSO(osopherName));
+            osophers.Add(osopherName);
         // }
+    }
+
+    public void UpdatePlayerOsophers() {
+        OnAddOsopher?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void HandleOnAddOsopher(object sender, EventArgs e) {
+        LobbyManager.Instance.UpdatePlayerOsophers(osophers[0], osophers[1], osophers[2]);
     }
 
     /// <summary>
