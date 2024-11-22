@@ -19,12 +19,12 @@ public class test : MonoBehaviour
     }
 
     private void Start() {
-        lobbyManager.OnJoinedLobbyUpdate += LobbyManager_OnJoinedLobbyUpdate;
+        // lobbyManager.OnJoinedLobbyUpdate += LobbyManager_OnJoinedLobbyUpdate;
     }
 
-    private void LobbyManager_OnJoinedLobbyUpdate(object sender, LobbyManager.LobbyEventArgs e) {
-        lobbyManager.PrintPlayers(e.lobby); 
-    }
+    // private void LobbyManager_OnJoinedLobbyUpdate(object sender, LobbyManager.LobbyEventArgs e) {
+    //     lobbyManager.PrintPlayers(e.lobby); 
+    // }
 
     public void ListLobbies() {
         lobbyManager.ListLobbies();

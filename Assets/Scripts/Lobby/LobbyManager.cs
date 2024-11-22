@@ -396,7 +396,7 @@ public class LobbyManager : MonoBehaviour
 
     public string ChoosePlayer1()
     {
-        if (_joinedLobby != null && _joinedLobby.Players.Count > 0)
+        if (_joinedLobby != null && _joinedLobby.Players.Count > 0 && _joinedLobby.HostId == AuthenticationService.Instance.PlayerId)
         {
             // Get all players
             List<Player> players = _joinedLobby.Players;
@@ -413,15 +413,19 @@ public class LobbyManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No players in the lobby to select from!");
+            Debug.LogWarning("No players in the lobby to select from! OR Not host!");
             return null;
         }
     }
 
     public async void UpdatePlayer1(string player1) {
-        try {            
-            Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(_joinedLobby.Id, new UpdateLobbyOptions {
-                Data = new Dictionary<string, DataObject> {
+        // Check if the current player is the host
+        if (_joinedLobby != null && _joinedLobby.HostId == AuthenticationService.Instance.PlayerId)
+        {
+            Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(_joinedLobby.Id, new UpdateLobbyOptions
+            {
+                Data = new Dictionary<string, DataObject>
+                {
                     { "Player1", new DataObject(DataObject.VisibilityOptions.Public, player1) }
                 }
             });
@@ -429,22 +433,31 @@ public class LobbyManager : MonoBehaviour
             _joinedLobby = lobby;
 
             OnChoosePlayers?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
-        } catch (LobbyServiceException e) {
-            Debug.Log(e);
+        }
+        else
+        {
+            Debug.LogWarning("Only the host can update Player1!");
         }
     }
 
     public async void UpdatePlayer2(string player2) {
-        try {            
-            Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(_joinedLobby.Id, new UpdateLobbyOptions {
-                Data = new Dictionary<string, DataObject> {
-                    { "Player2", new DataObject(DataObject.VisibilityOptions.Public, player2) }
-                }
-            });
+        try { 
+            if (_joinedLobby != null && _joinedLobby.HostId == AuthenticationService.Instance.PlayerId)
+            {           
+                Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(_joinedLobby.Id, new UpdateLobbyOptions {
+                    Data = new Dictionary<string, DataObject> {
+                        { "Player2", new DataObject(DataObject.VisibilityOptions.Public, player2) }
+                    }
+                });
 
-            _joinedLobby = lobby;
+                _joinedLobby = lobby;
 
-            OnChoosePlayers?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+                OnChoosePlayers?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+            }
+            else
+            {
+                Debug.LogWarning("Only the host can update Player2!");
+            }
         } catch (LobbyServiceException e) {
             Debug.Log(e);
         }
@@ -486,6 +499,15 @@ public class LobbyManager : MonoBehaviour
             LobbyService.Instance.DeleteLobbyAsync(_joinedLobby.Id);
         } catch (LobbyServiceException e) {
             Debug.Log(e);
+        }
+    }
+
+    public void GoToChooseOpponent() {
+        if (AuthenticationService.Instance.PlayerId == _joinedLobby.Data["Player1"].Value) {
+            _sceneController.GoToChooseOpponent();
+        }
+        else {
+            _sceneController.GoToChooseOpponentSpectator();
         }
     }
 }
