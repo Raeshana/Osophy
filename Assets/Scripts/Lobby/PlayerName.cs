@@ -14,9 +14,6 @@ public class EditPlayerName : MonoBehaviour {
     public event EventHandler OnNameChanged;
 
 
-    [SerializeField] private TextMeshProUGUI playerNameText;
-
-
     private string playerName = "Code Monkey";
 
     public void ClickButton() {

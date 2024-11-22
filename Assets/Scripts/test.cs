@@ -1,17 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class test : MonoBehaviour
 {
-    // DO NOT DELETE!!!!!!
-    [SerializeField]
-    private PlayerOsopherDict _playerOsopherDict;
+    private LobbyManager lobbyManager;
+    public event EventHandler OnJoinedLobbyUpdate;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Debug.Log(_playerOsopherDict.FindOsopher("Socrates"));
+    void Awake() {
+        lobbyManager = GameObject.FindWithTag("LobbyManager").GetComponent<LobbyManager>();
     }
-    // DO NOT DELETE!!!!!!
+
+    public void ClickButton() {
+        OnJoinedLobbyUpdate?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Start() {
+        lobbyManager.OnJoinedLobbyUpdate += LobbyManager_OnJoinedLobbyUpdate;
+    }
+
+    private void LobbyManager_OnJoinedLobbyUpdate(object sender, LobbyManager.LobbyEventArgs e) {
+        lobbyManager.PrintPlayers(e.lobby); 
+    }
 }

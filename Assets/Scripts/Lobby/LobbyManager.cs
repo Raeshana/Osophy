@@ -91,11 +91,11 @@ public class LobbyManager : MonoBehaviour
 
                 // Poll for lobby updates
                 Lobby lobby = await LobbyService.Instance.GetLobbyAsync(_joinedLobby.Id);
+                _joinedLobby = lobby;
 
                 if (lobby != null && _joinedLobby.Players.Count != lobby.Players.Count) {
                     // Trigger UI update when players count changes
-                    _joinedLobby = lobby;
-                    OnJoinedLobby?.Invoke(this, new LobbyManager.LobbyEventArgs { lobby = _joinedLobby });
+                    OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
                 }
 
                 OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
@@ -191,13 +191,13 @@ public class LobbyManager : MonoBehaviour
     private Player AddPlayer() {
         return new Player {
             Data = new Dictionary<string, PlayerDataObject> {
-                {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, _playerName)},
-                {"Osopher1", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, "")},
-                {"Osopher2", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, "")},
-                {"Osopher3", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, "")},
-                {"Debater", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, "")},
-                {"isSpectator", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, "")},
-                {"isAlive", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, "")}
+                {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, _playerName)}
+                // {"Osopher1", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
+                // {"Osopher2", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
+                // {"Osopher3", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
+                // {"Debater", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
+                // {"isSpectator", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
+                // {"isAlive", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")}
             }
         };
     }
