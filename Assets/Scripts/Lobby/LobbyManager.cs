@@ -440,24 +440,17 @@ public class LobbyManager : MonoBehaviour
     }
 
     public async void UpdatePlayer2(string player2) {
-        try { 
-            if (_joinedLobby != null && _joinedLobby.HostId == AuthenticationService.Instance.PlayerId)
-            {           
-                Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(_joinedLobby.Id, new UpdateLobbyOptions {
-                    Data = new Dictionary<string, DataObject> {
-                        { "Player2", new DataObject(DataObject.VisibilityOptions.Public, player2) }
-                    }
-                });
+        try {         
+            Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(_joinedLobby.Id, new UpdateLobbyOptions {
+                Data = new Dictionary<string, DataObject> {
+                    { "Player2", new DataObject(DataObject.VisibilityOptions.Public, player2) }
+                }
+            });
 
-                _joinedLobby = lobby;
+            _joinedLobby = lobby;
 
-                OnChoosePlayers?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
-                StartCoroutine(GoToChooseOpponentRoutine());
-            }
-            else
-            {
-                Debug.LogWarning("Only the host can update Player2!");
-            }
+            OnChoosePlayers?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+            StartCoroutine(GoToChooseOpponentRoutine());
         } catch (LobbyServiceException e) {
             Debug.Log(e);
         }
