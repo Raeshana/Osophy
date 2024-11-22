@@ -409,7 +409,7 @@ public class LobbyManager : MonoBehaviour
 
             UpdatePlayer1(player1);
 
-            return player1;
+            return players[randomIndex].Data["PlayerName"].Value;
         }
         else
         {
