@@ -394,8 +394,7 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    public string ChoosePlayer1()
-    {
+    public string ChoosePlayer1() {
         if (_joinedLobby != null && _joinedLobby.Players.Count > 0 && _joinedLobby.HostId == AuthenticationService.Instance.PlayerId)
         {
             // Get all players
@@ -414,7 +413,27 @@ public class LobbyManager : MonoBehaviour
         else
         {
             Debug.LogWarning("No players in the lobby to select from! OR Not host!");
-            return null;
+            return _joinedLobby.Data["Player1"].Value;
+        }
+    }
+
+    public void ChoosePlayer2() {
+        if (_joinedLobby != null && _joinedLobby.Players.Count > 0 && _joinedLobby.HostId == AuthenticationService.Instance.PlayerId)
+        {
+            // Get all players
+            List<Player> players = _joinedLobby.Players;
+
+            // Generate a random index
+            int randomIndex = UnityEngine.Random.Range(0, players.Count);
+
+            // Select a random player
+            string player2 = players[randomIndex].Id;
+
+            UpdatePlayer2(player2);
+        }
+        else
+        {
+            Debug.LogWarning("No players in the lobby to select from! OR Not host!");
         }
     }
 
