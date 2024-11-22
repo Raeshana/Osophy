@@ -56,4 +56,8 @@ public class SceneController : MonoBehaviour
     public void GoToJoinLobby(){
         SceneManager.LoadScene("JoinLobby");
     }
+
+    public void GoToInstructionsScene(){
+        SceneManager.LoadScene("InstructionsScene");
+    }
 }

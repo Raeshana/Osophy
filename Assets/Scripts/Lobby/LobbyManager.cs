@@ -108,8 +108,10 @@ public class LobbyManager : MonoBehaviour
                 IsPrivate = false,
                 Player = AddPlayer(),
                 Data = new Dictionary<string, DataObject> {
-                    {"GameMode", new DataObject(DataObject.VisibilityOptions.Public, "Trivia")},
-                    {"Map", new DataObject(DataObject.VisibilityOptions.Public, "de_dust2")}
+                    {"RoundNumber", new DataObject(DataObject.VisibilityOptions.Public, "1")},
+                    {"Player1", new DataObject(DataObject.VisibilityOptions.Public, "")},
+                    {"Player2", new DataObject(DataObject.VisibilityOptions.Public, "")},
+                    {"Spectator", new DataObject(DataObject.VisibilityOptions.Public, "")},
                 }
             };
 
@@ -191,14 +193,14 @@ public class LobbyManager : MonoBehaviour
         };
     }
 
-    // public string GetPlayer(Lobby lobby) {
-    //     foreach (Player player in lobby.Players) {
-    //         if (player.Id == AuthenticationService.Instance.PlayerId) {
-    //             return player.Data["PlayerName"].Value;
-    //         }
-    //     }
-    //     return null; // Returns null if player name is not found
-    // }
+    public string GetPlayer(Lobby lobby) {
+        foreach (Player player in lobby.Players) {
+            if (player.Id == AuthenticationService.Instance.PlayerId) {
+                return player.Data["PlayerName"].Value;
+            }
+        }
+        return null; // Returns null if player name is not found
+    }
 
     public void PrintPlayers(Lobby lobby) {
         Debug.Log("Players in Lobby " + lobby.Name + " " + lobby.Data["GameMode"].Value + " " + lobby.Data["Map"].Value);
@@ -216,11 +218,11 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    private async void UpdateLobbyGameMode(string gameMode) {
+    private async void UpdateLobbyRound(string round) {
         try {
             _hostLobby = await Lobbies.Instance.UpdateLobbyAsync(_hostLobby.Id, new UpdateLobbyOptions {
                 Data = new Dictionary<string, DataObject> {
-                    {"GameMode", new DataObject(DataObject.VisibilityOptions.Public, gameMode)}
+                    {"RoundNumber", new DataObject(DataObject.VisibilityOptions.Public, (Convert.ToInt32(round) + 1).ToString())}
                 }
             });
 

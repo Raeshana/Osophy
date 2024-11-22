@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Lobby.unity
     guid: 3bbce956c4c9f3b4cb60ce5bea8e9e89
   - enabled: 1
+    path: Assets/Scenes/InstructionsScene.unity
+    guid: c6ecb49307c6fac4580caece6e4cc507
+  - enabled: 1
     path: Assets/Scenes/InitialQRScanningScene.unity
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
   - enabled: 1
