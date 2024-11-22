@@ -9,34 +9,34 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/Initial/MainMenu.unity
     guid: a240d4a323a4d1645a419019ab9412d8
   - enabled: 1
-    path: Assets/Scenes/JoinLobby.unity
+    path: Assets/Scenes/Initial/JoinLobby.unity
     guid: a176cf17cb8e74a4ca716ec74aa680c4
   - enabled: 1
-    path: Assets/Scenes/Lobby.unity
+    path: Assets/Scenes/Initial/Lobby.unity
     guid: 3bbce956c4c9f3b4cb60ce5bea8e9e89
   - enabled: 1
-    path: Assets/Scenes/InstructionsScene.unity
+    path: Assets/Scenes/Initial/InstructionsScene.unity
     guid: c6ecb49307c6fac4580caece6e4cc507
   - enabled: 1
-    path: Assets/Scenes/InitialQRScanningScene.unity
+    path: Assets/Scenes/Setup/InitialQRScanningScene.unity
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
   - enabled: 1
-    path: Assets/Scenes/GameplayQRScanningScene.unity
+    path: Assets/Scenes/Setup/GameplayQRScanningScene.unity
     guid: db34efaebbc4fd0418f7e651fcb18868
   - enabled: 1
-    path: Assets/Scenes/TriviaScene.unity
+    path: Assets/Scenes/Trivia/TriviaScene.unity
     guid: 3f049e5b60354324fbd11070af36801a
   - enabled: 0
     path: Assets/Scenes/EngineScene.unity
     guid: e68dd469bd1cc4443888a0f9a541894d
   - enabled: 1
-    path: Assets/Scenes/RightScene.unity
+    path: Assets/Scenes/Trivia/RightScene.unity
     guid: c665c5c80e6d34d44b55101d7f1c21b5
   - enabled: 1
-    path: Assets/Scenes/WrongScene.unity
+    path: Assets/Scenes/Trivia/WrongScene.unity
     guid: 73bdbecb88d5c974c93aa84d8511674e
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: f2a5bc27b8e2ee24f98425be56d5c05a, type: 2}
