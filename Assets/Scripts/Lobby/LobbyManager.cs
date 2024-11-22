@@ -168,7 +168,7 @@ public class LobbyManager : MonoBehaviour
 
             Debug.Log("Lobbies found: " + queryResponse.Results.Count);
             foreach(Lobby lobby in queryResponse.Results) {
-                Debug.Log(lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Data["RoundNumber"].Value + lobby.Data["Player1"].Value);
+                Debug.Log(lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Data["RoundNumber"].Value + lobby.Data["Player1"].Value + lobby.Data["Player2"].Value);
                 //PrintPlayers(lobby);
             }
         } catch (LobbyServiceException e) {
@@ -212,9 +212,9 @@ public class LobbyManager : MonoBehaviour
         };
     }
 
-    public string GetPlayer(Lobby lobby) {
-        foreach (Player player in lobby.Players) {
-            if (player.Id == AuthenticationService.Instance.PlayerId) {
+    public string GetPlayer(string playerId) {
+        foreach (Player player in _joinedLobby.Players) {
+            if (player.Id == playerId) {
                 return player.Data["PlayerName"].Value;
             }
         }
@@ -417,26 +417,6 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    public void ChoosePlayer2() {
-        if (_joinedLobby != null && _joinedLobby.Players.Count > 0 && _joinedLobby.HostId == AuthenticationService.Instance.PlayerId)
-        {
-            // Get all players
-            List<Player> players = _joinedLobby.Players;
-
-            // Generate a random index
-            int randomIndex = UnityEngine.Random.Range(0, players.Count);
-
-            // Select a random player
-            string player2 = players[randomIndex].Id;
-
-            UpdatePlayer2(player2);
-        }
-        else
-        {
-            Debug.LogWarning("No players in the lobby to select from! OR Not host!");
-        }
-    }
-
     public async void UpdatePlayer1(string player1) {
         // Check if the current player is the host
         if (_joinedLobby != null && _joinedLobby.HostId == AuthenticationService.Instance.PlayerId)
@@ -524,7 +504,7 @@ public class LobbyManager : MonoBehaviour
 
     private IEnumerator GoToChooseOpponentRoutine() {
         yield return new WaitForSeconds(2);
-        GoToChooseOpponent();
+        _sceneController.GoToVersusScene();
     }
 
     public void GoToChooseOpponent() {
@@ -533,6 +513,18 @@ public class LobbyManager : MonoBehaviour
         }
         else {
             _sceneController.GoToChooseOpponentSpectator();
+        }
+    }
+
+    public void GoToChooseGameplay() {
+        if (AuthenticationService.Instance.PlayerId == _joinedLobby.Data["Player1"].Value) {
+            _sceneController.GoToGameplayQRScanningScene();
+        }
+        else if (AuthenticationService.Instance.PlayerId == _joinedLobby.Data["Player2"].Value){
+            _sceneController.GoToGameplayQRScanningScene();
+        }
+        else {
+            _sceneController.GoToSpectatorScene();
         }
     }
 }

@@ -72,4 +72,12 @@ public class SceneController : MonoBehaviour
     public void GoToVersusScene(){
         SceneManager.LoadScene("VersusScene");
     }
+
+    public void GoToGameplayQRScanningScene(){
+        SceneManager.LoadScene("GameplayQRScanningScene");
+    }
+
+    public void GoToSpectatorScene(){
+        SceneManager.LoadScene("SpectatorScene");
+    }
 }
