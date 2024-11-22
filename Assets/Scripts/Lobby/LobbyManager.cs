@@ -28,6 +28,7 @@ public class LobbyManager : MonoBehaviour
     private TMP_Text _feedback;
 
     public event EventHandler<LobbyEventArgs> OnJoinedLobby;
+    public event EventHandler<LobbyEventArgs> OnJoinedLobbyUpdate;
 
     public class LobbyEventArgs : EventArgs {
         public Lobby lobby { get; set; }
@@ -90,12 +91,14 @@ public class LobbyManager : MonoBehaviour
 
                 // Poll for lobby updates
                 Lobby lobby = await LobbyService.Instance.GetLobbyAsync(_joinedLobby.Id);
-                //_joinedLobby = lobby;
+
                 if (lobby != null && _joinedLobby.Players.Count != lobby.Players.Count) {
                     // Trigger UI update when players count changes
                     _joinedLobby = lobby;
                     OnJoinedLobby?.Invoke(this, new LobbyManager.LobbyEventArgs { lobby = _joinedLobby });
                 }
+
+                OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
             }
         }
     }
@@ -240,16 +243,28 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    private async void UpdatePlayerName(string newPlayerName) {
-        try{
-            _playerName = newPlayerName;
-            await LobbyService.Instance.UpdatePlayerAsync(_joinedLobby.Id, AuthenticationService.Instance.PlayerId, new UpdatePlayerOptions {
-                Data = new Dictionary<string, PlayerDataObject> {
-                    {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, _playerName)}
-                }
-            });
-        } catch (LobbyServiceException e) {
-            Debug.Log(e);
+    public async void UpdatePlayerName(string newPlayerName) {
+        this._playerName = newPlayerName;
+        if (_joinedLobby != null) {
+            try {
+                UpdatePlayerOptions options = new UpdatePlayerOptions();
+
+                options.Data = new Dictionary<string, PlayerDataObject>() {
+                    {
+                        "PlayerName", new PlayerDataObject(
+                            visibility: PlayerDataObject.VisibilityOptions.Public,
+                            value: newPlayerName)
+                    }
+                };
+
+                string playerId = AuthenticationService.Instance.PlayerId;
+                Lobby lobby = await LobbyService.Instance.UpdatePlayerAsync(_joinedLobby.Id, playerId, options);
+                _joinedLobby = lobby;
+
+                OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+            } catch (LobbyServiceException e) {
+                Debug.Log(e); 
+            }   
         }
     }
 
