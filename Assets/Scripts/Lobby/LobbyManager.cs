@@ -121,7 +121,7 @@ public class LobbyManager : MonoBehaviour
                 // Updates Player metadata
                 OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
                 // Updates Lobby Player1 and Player2 metadata 
-                OnChoosePlayer1?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+                // OnChoosePlayer1?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
                 OnChoosePlayer2?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
             }
         }
@@ -510,6 +510,10 @@ public class LobbyManager : MonoBehaviour
         } catch (LobbyServiceException e) {
             Debug.Log(e);
         }
+    }
+
+    public void CallUpdatePlayer1() {
+        OnChoosePlayer1?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
     }
 
     public async void UpdatePlayer2(string player2) {

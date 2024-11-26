@@ -23,6 +23,9 @@ public class UpdatePlayer1 : MonoBehaviour
 
         // Subscribe to OnChoosePlayer1 event
         _lobbyManager.OnChoosePlayer1  += HandleOnUpdatePlayer1;
+
+        // trigger OnChoosePlayer1 event
+        _lobbyManager.CallUpdatePlayer1();
     }
 
     /// <summary>
