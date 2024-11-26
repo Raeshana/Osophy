@@ -61,12 +61,16 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene("InstructionsScene");
     }
 
-    public void GoToChooseOpponent(){
-        SceneManager.LoadScene("ChooseOpponent");
+    public void GoToChooseOpponentPlayer(){
+        SceneManager.LoadScene("ChooseOpponentPlayer");
     }
 
     public void GoToChooseOpponentSpectator(){
         SceneManager.LoadScene("ChooseOpponentSpectator");
+    }
+
+    public void GoToChooseOpponentScene() {
+        LobbyManager.Instance.GoToChooseOpponentScene();
     }
 
     public void GoToVersusScene(){

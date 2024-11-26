@@ -33,4 +33,8 @@ public class PlayerName : MonoBehaviour {
     private void PlayerName_OnNameChanged(object sender, EventArgs e) {
         LobbyManager.Instance.UpdatePlayerName(_playerName);
     }
+
+    private void OnDestroy() {
+        OnNameChanged -= PlayerName_OnNameChanged;
+    }
 }

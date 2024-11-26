@@ -2,31 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
-public class PopulateChooseOpponent : MonoBehaviour
+public class PopulateChooseOpponentPlayer : MonoBehaviour
 {
-    private LobbyManager lobbyManager;
+    private LobbyManager _lobbyManager;
 
     [SerializeField]
     private GameObject[] _playerButtons;
     [SerializeField]
     private TMP_Text[] _playerButtonText;
-    [SerializeField]
-    private StoreOpponentID[] _storePlayerID;
 
     void Awake() {
-        lobbyManager = GameObject.FindWithTag("LobbyManager").GetComponent<LobbyManager>();
+        _lobbyManager = GameObject.FindWithTag("LobbyManager").GetComponent<LobbyManager>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         int i = 0;
-        foreach(var player in lobbyManager._joinedLobby.Players) {
-            if (player.Id != lobbyManager._joinedLobby.Data["Player1"].Value) {
+        foreach(var player in _lobbyManager._joinedLobby.Players) {
+            if (player.Id != _lobbyManager._joinedLobby.Data["Player1"].Value) {
                 _playerButtons[i].SetActive(true);
                 _playerButtonText[i].text = player.Data["PlayerName"].Value;
-                _storePlayerID[i].opponentID = player.Id;
+                _playerButtons[i].GetComponent<UpdatePlayer2>().opponentID = player.Id;
                 i++;
             }
         }

@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpdatePlayers : MonoBehaviour
+public class UpdatePlayer1 : MonoBehaviour
 {
     private LobbyManager _lobbyManager;
     [SerializeField] 
@@ -21,9 +21,8 @@ public class UpdatePlayers : MonoBehaviour
         // Host chooses Player1 when scene is called
         _lobbyManager.ChoosePlayer1();
 
-        // Subscribe to OnChoosePlayers event
-        _lobbyManager.OnChoosePlayers  += HandleOnUpdatePlayer1;
-        _lobbyManager.OnChoosePlayers  += HandleOnUpdatePlayer2;
+        // Subscribe to OnChoosePlayer1 event
+        _lobbyManager.OnChoosePlayer1  += HandleOnUpdatePlayer1;
     }
 
     /// <summary>
@@ -36,7 +35,9 @@ public class UpdatePlayers : MonoBehaviour
         _playerNameUI.text = _playerName;
     }
 
-    private void HandleOnUpdatePlayer2(object sender, EventArgs e) {
-        //lobbyManager.UpdatePlayer1(lobbyManager.ChoosePlayer1());
+    private void OnDestroy() {
+        if (_lobbyManager != null) {
+            _lobbyManager.OnJoinedLobby -= HandleOnUpdatePlayer1;
+        }
     }
 }

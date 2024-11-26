@@ -32,7 +32,8 @@ public class LobbyManager : MonoBehaviour
 
     public event EventHandler<LobbyEventArgs> OnJoinedLobby; // Triggered when a new player joins a lobby
     public event EventHandler<LobbyEventArgs> OnJoinedLobbyUpdate; // Triggered when the lobby is updated
-    public event EventHandler<LobbyEventArgs> OnChoosePlayers; // Triggered when the game updates on player 1 and 2
+    public event EventHandler<LobbyEventArgs> OnChoosePlayer1; // Triggered when the game updates Player1 metadata
+    public event EventHandler<LobbyEventArgs> OnChoosePlayer2; // Triggered when the game updates Player2 metadata
 
     public class LobbyEventArgs : EventArgs {
         public Lobby lobby { get; set; }
@@ -116,19 +117,12 @@ public class LobbyManager : MonoBehaviour
                     OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
                 }
 
-                // Updates Player1 and Player2 metadata 
-                // When game chooses Player1
-                // When Player1 chooses Player2  
-                if (lobby != null && 
-                    (_joinedLobby.Data["Player1"].Value != lobby.Data["Player1"].Value ||
-                    _joinedLobby.Data["Player2"].Value != lobby.Data["Player2"].Value)) {
-                    _joinedLobby = lobby;
-                    OnChoosePlayers?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
-                }
-
-                // 
                 _joinedLobby = lobby;
+                // Updates Player metadata
                 OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+                // Updates Lobby Player1 and Player2 metadata 
+                OnChoosePlayer1?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+                OnChoosePlayer2?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
             }
         }
     }
@@ -488,10 +482,10 @@ public class LobbyManager : MonoBehaviour
     /// </summary>
     /// <param name="player1"></param>
     public async void UpdatePlayer1(string player1) {
-        try{
+        try {
             UpdateLobbyOptions options = new UpdateLobbyOptions();
             options.Name = "testLobbyName";
-            options.MaxPlayers = 4;
+            options.MaxPlayers = 3;
             options.IsPrivate = false;
 
             options.HostId = AuthenticationService.Instance.PlayerId;
@@ -508,8 +502,8 @@ public class LobbyManager : MonoBehaviour
             var lobby = await LobbyService.Instance.UpdateLobbyAsync(_joinedLobby.Id, options);
             _joinedLobby = lobby;
 
-            // Trigger OnChoosePlayers event
-            OnChoosePlayers?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+            // Trigger OnChoosePlayer1 event
+            OnChoosePlayer1?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
 
             // Migrate host to Player1 so they can make changes to the Lobby
             // MigrateLobbyHost(_joinedLobby.Data["Player1"].Value);
@@ -519,20 +513,37 @@ public class LobbyManager : MonoBehaviour
     }
 
     public async void UpdatePlayer2(string player2) {
-        try {         
-            Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(_joinedLobby.Id, new UpdateLobbyOptions {
-                Data = new Dictionary<string, DataObject> {
-                    { "Player2", new DataObject(DataObject.VisibilityOptions.Public, player2) }
-                }
-            });
+        if (AuthenticationService.Instance.PlayerId == _joinedLobby.HostId) {
+            try {
+                UpdateLobbyOptions options = new UpdateLobbyOptions();
+                options.Name = "testLobbyName";
+                options.MaxPlayers = 3;
+                options.IsPrivate = false;
 
-            _joinedLobby = lobby;
+                options.HostId = AuthenticationService.Instance.PlayerId;
 
-            OnChoosePlayers?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
-            StartCoroutine(GoToChooseOpponentRoutine());
-        } catch (LobbyServiceException e) {
-            Debug.Log(e);
+                options.Data = new Dictionary<string, DataObject>()
+                {
+                    {
+                        "Player2", new DataObject(
+                            visibility: DataObject.VisibilityOptions.Public,
+                            value: player2)
+                    }
+                };
+
+                var lobby = await LobbyService.Instance.UpdateLobbyAsync(_joinedLobby.Id, options);
+                _joinedLobby = lobby;
+
+                // Trigger OnChoosePlayer2 event
+                OnChoosePlayer2?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+            } catch (LobbyServiceException e) {
+                Debug.Log(e);
+            }
         }
+    }
+
+    public void CallUpdatePlayer2() {
+        OnChoosePlayer2?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
     }
 
     /// <summary>
@@ -615,14 +626,9 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    private IEnumerator GoToChooseOpponentRoutine() {
-        yield return new WaitForSeconds(2);
-        _sceneController.GoToVersusScene();
-    }
-
-    public void GoToChooseOpponent() {
+    public void GoToChooseOpponentScene() {
         if (AuthenticationService.Instance.PlayerId == _joinedLobby.Data["Player1"].Value) {
-            _sceneController.GoToChooseOpponent();
+            _sceneController.GoToChooseOpponentPlayer();
         }
         else {
             _sceneController.GoToChooseOpponentSpectator();

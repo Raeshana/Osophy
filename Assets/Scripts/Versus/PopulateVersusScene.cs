@@ -5,20 +5,22 @@ using UnityEngine;
 
 public class PopulateVersusScene : MonoBehaviour
 {
-    [SerializeField] TMP_Text player1;
-    [SerializeField] TMP_Text player2;
+    [SerializeField] 
+    private TMP_Text _player1;
+    [SerializeField] 
+    private TMP_Text _player2;
 
-    private LobbyManager lobbyManager;
+    private LobbyManager _lobbyManager;
 
     void Awake() {
-        lobbyManager = GameObject.FindWithTag("LobbyManager").GetComponent<LobbyManager>();
+        _lobbyManager = GameObject.FindWithTag("LobbyManager").GetComponent<LobbyManager>();
     }
 
     void Start() {
-        // string player1Id = lobbyManager._joinedLobby.Data["Player1"].Value;
-        // player1.text = lobbyManager.GetPlayer(player1Id);
+        string player1Id = _lobbyManager._joinedLobby.Data["Player1"].Value;
+        _player1.text = _lobbyManager.GetPlayer(_lobbyManager._joinedLobby, player1Id);
 
-        // string player2Id = lobbyManager._joinedLobby.Data["Player2"].Value;
-        // player1.text = lobbyManager.GetPlayer(player2Id);
+        string player2Id = _lobbyManager._joinedLobby.Data["Player2"].Value;
+        _player2.text = _lobbyManager.GetPlayer(_lobbyManager._joinedLobby, player2Id);
     }
 }

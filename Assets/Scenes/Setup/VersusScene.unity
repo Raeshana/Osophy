@@ -789,7 +789,7 @@ GameObject:
   - component: {fileID: 1684791672}
   - component: {fileID: 1684791674}
   m_Layer: 0
-  m_Name: Coop Manager
+  m_Name: CoopManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -807,8 +807,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97adda366c150ab47985777abaafb9f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 1766569370}
-  player2: {fileID: 983312867}
+  _player1: {fileID: 1766569370}
+  _player2: {fileID: 983312867}
 --- !u!4 &1684791673
 Transform:
   m_ObjectHideFlags: 0

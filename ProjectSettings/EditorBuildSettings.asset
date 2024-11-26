@@ -30,7 +30,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Setup/PlayerTurn.unity
     guid: 9c6b7840294cccc4c9d60fdaa5c6ed74
   - enabled: 1
-    path: Assets/Scenes/Setup/ChooseOpponent.unity
+    path: Assets/Scenes/Setup/ChooseOpponentPlayer.unity
     guid: 04bf9100a0658394cbe6bd1d404c000d
   - enabled: 1
     path: Assets/Scenes/Setup/ChooseOpponentSpectator.unity
