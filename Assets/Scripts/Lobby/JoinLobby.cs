@@ -5,14 +5,19 @@ using TMPro;
 
 public class JoinLobby : MonoBehaviour
 {
-    private LobbyManager lobbyManager;
-    [SerializeField] TMP_InputField _inputCode;
+    private LobbyManager _lobbyManager;
+    [SerializeField] 
+    private TMP_InputField _inputCode;
 
     private void Awake() {
-        lobbyManager = GameObject.FindWithTag("LobbyManager").GetComponent<LobbyManager>();
+        _lobbyManager = GameObject.FindWithTag("LobbyManager").GetComponent<LobbyManager>();
     }
 
+    /// <summary>
+    /// Allows player to join a Lobby using a code when
+    /// button is clicked
+    /// </summary>
     public void JoinLobbyByCode() {
-        lobbyManager.JoinLobbyByCode(_inputCode.text);
+        _lobbyManager.JoinLobbyByCode(_inputCode.text);
     }
 }

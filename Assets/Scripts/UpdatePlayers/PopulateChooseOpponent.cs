@@ -8,11 +8,11 @@ public class PopulateChooseOpponent : MonoBehaviour
     private LobbyManager lobbyManager;
 
     [SerializeField]
-    private GameObject[] playerButtons;
+    private GameObject[] _playerButtons;
     [SerializeField]
-    private TMP_Text[] playerButtonText;
+    private TMP_Text[] _playerButtonText;
     [SerializeField]
-    private StoreOpponentID[] storePlayerID;
+    private StoreOpponentID[] _storePlayerID;
 
     void Awake() {
         lobbyManager = GameObject.FindWithTag("LobbyManager").GetComponent<LobbyManager>();
@@ -24,9 +24,9 @@ public class PopulateChooseOpponent : MonoBehaviour
         int i = 0;
         foreach(var player in lobbyManager._joinedLobby.Players) {
             if (player.Id != lobbyManager._joinedLobby.Data["Player1"].Value) {
-                playerButtons[i].SetActive(true);
-                playerButtonText[i].text = player.Data["PlayerName"].Value;
-                storePlayerID[i].opponentID = player.Id;
+                _playerButtons[i].SetActive(true);
+                _playerButtonText[i].text = player.Data["PlayerName"].Value;
+                _storePlayerID[i].opponentID = player.Id;
                 i++;
             }
         }

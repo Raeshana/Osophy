@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class SignIn : MonoBehaviour
 {
-    private LobbyManager lobbyManager;
+    private LobbyManager _lobbyManager;
 
     void Awake() {
-        lobbyManager = GameObject.FindWithTag("LobbyManager").GetComponent<LobbyManager>();
+        _lobbyManager = GameObject.FindWithTag("LobbyManager").GetComponent<LobbyManager>();
     }
 
     void Start()
     {
-        lobbyManager.SignIn();
+        // Ensures each player is signed in when they open the game
+        _lobbyManager.SignIn();
     }
 }

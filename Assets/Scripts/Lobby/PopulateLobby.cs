@@ -5,7 +5,7 @@ using Unity.Services.Lobbies.Models;
 
 public class PopulateLobby : MonoBehaviour
 {
-    private LobbyManager lobbyManager;
+    private LobbyManager _lobbyManager;
 
     [Header("Player Profiles ----------")]
     [SerializeField] 
@@ -18,7 +18,7 @@ public class PopulateLobby : MonoBehaviour
     private TMP_Text _code;
 
     void Awake() {
-        lobbyManager = GameObject.FindWithTag("LobbyManager").GetComponent<LobbyManager>();
+        _lobbyManager = GameObject.FindWithTag("LobbyManager").GetComponent<LobbyManager>();
     }
 
     void Start() {
@@ -26,33 +26,50 @@ public class PopulateLobby : MonoBehaviour
         StartCoroutine(WaitForLobbyData());
     }
 
+    /// <summary>
+    /// Ensure data is ready before subscribing to event
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator WaitForLobbyData() {
-        // Wait until the lobby data is ready
-        while (!lobbyManager.IsLobbyReady) {
-            yield return null;  // Wait for the next frame before checking again
+        while (!_lobbyManager.IsLobbyReady) {
+            yield return null; 
         }
 
-        // Once the data is ready, subscribe to the OnJoinedLobby event
-        lobbyManager.OnJoinedLobby += HandleLobbyJoined;
+        // Subscribe to the OnJoinedLobby event
+        _lobbyManager.OnJoinedLobby += HandleLobbyJoined;
     }
 
+    /// <summary>
+    /// Handles the OnJoinedLobby event
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void HandleLobbyJoined(object sender, LobbyManager.LobbyEventArgs e) {
-        // Update the UI when the player joins the lobby
         UpdateLobbyDisplay(e.lobby);
     }
 
+    /// <summary>
+    /// Updates player profiles in Lobby scene
+    /// </summary>
+    /// <param name="lobby"></param>
     private void UpdateLobbyDisplay(Lobby lobby) {
-        // Display player profiles
-        lobbyManager.DisplayPlayers(lobby, _profiles, _names);
+        int idx = 0; // Counter and indexing
+        foreach(Player player in lobby.Players) {
+            _profiles[idx].SetActive(true); // Display player profile 
+            _names[idx].text = player.Data["PlayerName"].Value; // Update player name 
+            idx++;
+        }
 
-        // Set the join code
+        // Display join code
         _code.text = lobby.LobbyCode;
     }
 
+    /// <summary>
+    /// Unsubscribe to prevent memory leaks
+    /// </summary>
     private void OnDestroy() {
-        // Unsubscribe to prevent memory leaks
-        if (lobbyManager != null) {
-            lobbyManager.OnJoinedLobby -= HandleLobbyJoined;
+        if (_lobbyManager != null) {
+            _lobbyManager.OnJoinedLobby -= HandleLobbyJoined;
         }
     }
 }

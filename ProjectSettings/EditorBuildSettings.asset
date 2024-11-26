@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Initial/MainMenu.unity
     guid: a240d4a323a4d1645a419019ab9412d8
   - enabled: 1
+    path: Assets/Scenes/Initial/Credits.unity
+    guid: 6f168b1d61b92764bb424dba7c3ccaf8
+  - enabled: 1
     path: Assets/Scenes/Initial/JoinLobby.unity
     guid: a176cf17cb8e74a4ca716ec74aa680c4
   - enabled: 1

@@ -15,10 +15,10 @@ public class PopulateVersusScene : MonoBehaviour
     }
 
     void Start() {
-        string player1Id = lobbyManager._joinedLobby.Data["Player1"].Value;
-        player1.text = lobbyManager.GetPlayer(player1Id);
+        // string player1Id = lobbyManager._joinedLobby.Data["Player1"].Value;
+        // player1.text = lobbyManager.GetPlayer(player1Id);
 
-        string player2Id = lobbyManager._joinedLobby.Data["Player2"].Value;
-        player1.text = lobbyManager.GetPlayer(player2Id);
+        // string player2Id = lobbyManager._joinedLobby.Data["Player2"].Value;
+        // player1.text = lobbyManager.GetPlayer(player2Id);
     }
 }

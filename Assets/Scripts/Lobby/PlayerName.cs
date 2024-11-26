@@ -5,27 +5,32 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EditPlayerName : MonoBehaviour {
+public class PlayerName : MonoBehaviour {
 
-    public static EditPlayerName Instance { get; private set; }
+    public static PlayerName Instance { get; private set; }
 
     public event EventHandler OnNameChanged;
 
-    private string _playerName = "Code Monkey";
+    private string _playerName = "Code Monkey"; // Replace with text from imput field
 
+    /// <summary>
+    /// Triggers the OnNameChanged event when button is clicked
+    /// </summary>
     public void ClickButton() {
         OnNameChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private void Start() {
-        OnNameChanged += EditPlayerName_OnNameChanged;
+        // Subscribe to OnNameChanged event
+        OnNameChanged += PlayerName_OnNameChanged;
     }
 
-    private void EditPlayerName_OnNameChanged(object sender, EventArgs e) {
-        LobbyManager.Instance.UpdatePlayerName(GetPlayerName());
-    }
-
-    public string GetPlayerName() {
-        return _playerName;
+    /// <summary>
+    /// Calls UpdatePlayerName to ensure changes are made across all clients
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void PlayerName_OnNameChanged(object sender, EventArgs e) {
+        LobbyManager.Instance.UpdatePlayerName(_playerName);
     }
 }
