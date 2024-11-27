@@ -556,6 +556,7 @@ GameObject:
   m_Component:
   - component: {fileID: 688492281}
   - component: {fileID: 688492282}
+  - component: {fileID: 688492283}
   m_Layer: 0
   m_Name: CoopManager
   m_TagString: Untagged
@@ -590,7 +591,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0a1fca46382834195ca77050272bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerButtonText: {fileID: 1059138321}
+  _player1Text: {fileID: 1059138321}
+--- !u!114 &688492283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688492280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815f7149b482166449558bc54d9c5b2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opponentID: 
 --- !u!1 &958843372
 GameObject:
   m_ObjectHideFlags: 0

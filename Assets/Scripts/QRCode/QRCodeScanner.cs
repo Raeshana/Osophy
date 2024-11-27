@@ -35,7 +35,7 @@ public class QRCodeScanner : MonoBehaviour
     private GameObject[] _panels;
     private ChangeCardPanel _changeCardPanel;
     [SerializeField]
-    private int osopherNum;
+    private int _osopherNum;
     private int _osopherNumCurr;
 
     [Header("Camera Settings ----------")]
@@ -50,7 +50,7 @@ public class QRCodeScanner : MonoBehaviour
     /// Initialize _osopherNumCurr
     /// </summary>
     void Awake() {
-        _osopherNumCurr = osopherNum;
+        _osopherNumCurr = _osopherNum;
     }
 
     /// <summary>
@@ -98,12 +98,12 @@ public class QRCodeScanner : MonoBehaviour
 
         for (int i = 0; i < devices.Length; i++) {
             // Uncomment for mobile build
-            // if (!devices[i].isFrontFacing) {
-            //     _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
-            // }
+            if (!devices[i].isFrontFacing) {
+                _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
+            }
 
             // Comment for mobile build
-            _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
+            // _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
         }
 
         _camTex.Play();
@@ -185,10 +185,10 @@ public class QRCodeScanner : MonoBehaviour
         if (_gameOsopherDict.FindOsopher(text)) {
             _playerOsopherDict.AddOsopher(text);
             ChangePanel(text);
-            ManageOsopherNum();
+            ManageOsopherNumInitial();
         }
         else {
-            _text.text = "Oops! This isn't an Osopher! Scan your Osophers!";
+            _text.text = "Oops, this isn't an Osopher! Scan again!";
         }
     }
 
@@ -210,14 +210,14 @@ public class QRCodeScanner : MonoBehaviour
             if (_playerOsopherDict.FindOsopher(text)) {
                 playerDebater.AssignDebater(text);
                 ChangePanel(text);
-                ManageOsopherNum();
+                ManageOsopherNumGameplay();
             }   
             else {
-                _text.text = "You don't have this Osopher! Scan your Osopher!";
+                _text.text = "Oops, you don't have this Osopher! Scan again!";
             }
         }
         else {
-            _text.text = "Oops! This isn't an Osopher! Scan your Osopher!";
+            _text.text = "Oops, this isn't an Osopher! Scan again!";
         }
     }
 
@@ -226,7 +226,8 @@ public class QRCodeScanner : MonoBehaviour
     /// </summary>
     /// <param name="text"> Text read from QR code </param>
     private void ChangePanel(string text) {
-        _changeCardPanel.ChangeSprite(_panels[osopherNum-_osopherNumCurr], _gameOsopherDict.GetOsopherSO(text));
+        Debug.Log("Osopher num: " + _osopherNum + "Osopher num curr: " + _osopherNumCurr);
+        _changeCardPanel.ChangeSprite(_panels[_osopherNum-_osopherNumCurr], _gameOsopherDict.GetOsopherSO(text));
     }
 
     /// <summary>
@@ -234,10 +235,22 @@ public class QRCodeScanner : MonoBehaviour
     /// Osopher is scanned in
     /// If all osophers were scanned, go to next scene
     /// </summary>
-    private void ManageOsopherNum() {
+    private void ManageOsopherNumInitial() {
         _osopherNumCurr--;
-        if (_osopherNumCurr == 0) {
+        if (_osopherNumCurr <= 0) {
             _playerOsopherDict.UpdatePlayerOsophers();
+            StartCoroutine(WaitForPlayerUpdates());
+        }
+    }
+
+    /// <summary>
+    /// Decrement _osopherNum when a valid
+    /// Osopher is scanned in
+    /// If all osophers were scanned, go to next scene
+    /// </summary>
+    private void ManageOsopherNumGameplay() {
+        _osopherNumCurr--;
+        if (_osopherNumCurr <= 0) {
             StartCoroutine(WaitForPlayerUpdates());
         }
     }
@@ -271,10 +284,10 @@ public class QRCodeScanner : MonoBehaviour
                 //Debug.Log(result.Text);
             } 
             else {
-                _text.text = "FAILED TO READ QR CODE";
+                _text.text = "Oops! Scan again!";
             }
         } catch (Exception ex) {
-            _text.text = "Scan Failed: " + ex.Message;
+            _text.text = "Oops! Scan again!";
             Debug.LogError("Scan Error: " + ex.Message + "\n" + ex.StackTrace);
     }
     }

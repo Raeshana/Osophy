@@ -24,6 +24,7 @@ public class PlayerOsopherDict : MonoBehaviour
     }
 
     void Start() {
+        // Subscribe to HandleOnAddOsopher
         OnAddOsopher += HandleOnAddOsopher;
     }
 
@@ -41,10 +42,18 @@ public class PlayerOsopherDict : MonoBehaviour
         // }
     }
 
+    /// <summary>
+    /// Trigger OnAddOsopher event
+    /// </summary>
     public void UpdatePlayerOsophers() {
         OnAddOsopher?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// Updates Osopher1, Osopher2, and Osopher3 player metadata
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void HandleOnAddOsopher(object sender, EventArgs e) {
         LobbyManager.Instance.UpdatePlayerOsophers(_osophers[0], _osophers[1], _osophers[2]);
     }

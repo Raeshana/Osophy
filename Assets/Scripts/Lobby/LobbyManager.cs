@@ -8,6 +8,7 @@ using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -118,11 +119,19 @@ public class LobbyManager : MonoBehaviour
                 }
 
                 _joinedLobby = lobby;
+
                 // Updates Player metadata
                 OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+
                 // Updates Lobby Player1 and Player2 metadata 
-                // OnChoosePlayer1?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
-                OnChoosePlayer2?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+                if (SceneManager.GetActiveScene().name == "PlayerTurn") {
+                    OnChoosePlayer1?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+                }
+                
+                if (SceneManager.GetActiveScene().name == "ChooseOpponentPlayer" || 
+                    SceneManager.GetActiveScene().name == "ChooseOpponentSpectator") {
+                        OnChoosePlayer2?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+                    }
             }
         }
     }
@@ -145,7 +154,7 @@ public class LobbyManager : MonoBehaviour
                     {"RoundNumber", new DataObject(DataObject.VisibilityOptions.Public, "1")},
                     {"Player1", new DataObject(DataObject.VisibilityOptions.Public, "")},
                     {"Player2", new DataObject(DataObject.VisibilityOptions.Public, "")},
-                    {"Spectator", new DataObject(DataObject.VisibilityOptions.Public, "")},
+                    {"Spectator", new DataObject(DataObject.VisibilityOptions.Public, "")}
                 }
             };
 
@@ -214,7 +223,6 @@ public class LobbyManager : MonoBehaviour
     /// Osopher2: Name of player's second scanned Osopher
     /// Osopher3: Name of player's third scanned Osopher
     /// Debater: Name of player's Osopher card who will be debating
-    /// isSpectator: true if player is spectating, false if they are playing
     /// numCards: Number of cards player has in hand (not necessarily playable)
     /// </summary>
     /// <returns> Player </returns>
@@ -222,11 +230,11 @@ public class LobbyManager : MonoBehaviour
         return new Player {
             Data = new Dictionary<string, PlayerDataObject> {
                 {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, _playerName)},
+                {"PlayerOpponent", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
                 {"Osopher1", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
                 {"Osopher2", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
                 {"Osopher3", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
                 {"Debater", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
-                {"isSpectator", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "true")},
                 {"numCards", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "3")}
             }
         };
@@ -237,10 +245,10 @@ public class LobbyManager : MonoBehaviour
     /// </summary>
     /// <param name="playerId"></param>
     /// <returns> Name of a player whose ID matches playerID </returns>
-    public string GetPlayer(Lobby lobby, string playerId) {
+    public Player GetPlayer(Lobby lobby, string playerId) {
         foreach (Player player in lobby.Players) {
             if (player.Id == playerId) {
-                return player.Data["PlayerName"].Value;
+                return player;
             }
         }
         return null; // Returns null if player name is not found
@@ -255,29 +263,12 @@ public class LobbyManager : MonoBehaviour
         foreach(Player player in lobby.Players) {
             Debug.Log("Player ID: " + player.Id); 
             Debug.Log("Player Name: " + player.Data["PlayerName"].Value);
+            Debug.Log("Player Opponent: " + player.Data["PlayerOpponent"].Value);
             Debug.Log("Osopher 1: " + player.Data["Osopher1"].Value);
             Debug.Log("Osopher 2: " + player.Data["Osopher2"].Value);
             Debug.Log("Osopher 3: " + player.Data["Osopher3"].Value);
             Debug.Log("Player Debater: " + player.Data["Debater"].Value);
-            Debug.Log("isSpectator: " + player.Data["isSpectator"].Value);
-            Debug.Log("isAlive: " + player.Data["isAlive"].Value);
-        }
-    }
-
-    // REDO
-    private async void UpdateLobbyRound(string round) {
-        try {
-            _hostLobby = await Lobbies.Instance.UpdateLobbyAsync(_hostLobby.Id, new UpdateLobbyOptions {
-                Data = new Dictionary<string, DataObject> {
-                    {"RoundNumber", new DataObject(DataObject.VisibilityOptions.Public, (Convert.ToInt32(round) + 1).ToString())}
-                }
-            });
-
-            _joinedLobby = _hostLobby;
-
-            //PrintPlayers(_hostLobby);
-        } catch (LobbyServiceException e) {
-            Debug.Log(e);
+            Debug.Log("numCards: " + player.Data["numCards"].Value);
         }
     }
 
@@ -307,6 +298,41 @@ public class LobbyManager : MonoBehaviour
 
                 // Trigger OnJoinedLobbyUpdate event
                 OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+            } catch (LobbyServiceException e) {
+                Debug.Log(e); 
+            }   
+        }
+    }
+
+    /// <summary>
+    /// Updates player's opponent when player is Player1,
+    /// Used by host to populate Player2
+    /// </summary>
+    /// <param name="newPlayerName"> Changed player name </param>
+    public async void UpdatePlayerOpponent(string newPlayerOpponent) {
+        if (_joinedLobby != null) {
+            try {
+                UpdatePlayerOptions options = new UpdatePlayerOptions();
+
+                options.Data = new Dictionary<string, PlayerDataObject>() {
+                    {
+                        "PlayerOpponent", new PlayerDataObject(
+                            visibility: PlayerDataObject.VisibilityOptions.Public,
+                            value: newPlayerOpponent)
+                    }
+                };
+
+                // Update Lobby with new player information
+                string _playerId = AuthenticationService.Instance.PlayerId;
+                Lobby lobby = await LobbyService.Instance.UpdatePlayerAsync(_joinedLobby.Id, _playerId, options);
+                _joinedLobby = lobby;
+
+                // Trigger OnJoinedLobbyUpdate event
+                OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+                // Trigger OnChoosePlayer2 event
+                OnChoosePlayer2?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+
+                PrintPlayers(_joinedLobby);
             } catch (LobbyServiceException e) {
                 Debug.Log(e); 
             }   
@@ -373,37 +399,6 @@ public class LobbyManager : MonoBehaviour
                         "Debater", new PlayerDataObject(
                             visibility: PlayerDataObject.VisibilityOptions.Public,
                             value: debater)
-                    }
-                };
-
-                // Update Lobby with new player information
-                string playerId = AuthenticationService.Instance.PlayerId;
-                Lobby lobby = await LobbyService.Instance.UpdatePlayerAsync(_joinedLobby.Id, playerId, options);
-                _joinedLobby = lobby;
-
-                // Trigger OnJoinedLobbyUpdate event
-                OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
-            } catch (LobbyServiceException e) {
-                Debug.Log(e); 
-            }   
-        }
-    }
-
-    /// <summary>
-    /// Called by event handler when a player's spectator status is updated
-    /// so that it can be updated across all clients
-    /// </summary>
-    /// <param name="isSpectator"></param>
-    public async void UpdatePlayerSpectatorStatus(string isSpectator) {
-        if (_joinedLobby != null) {
-            try {
-                UpdatePlayerOptions options = new UpdatePlayerOptions();
-
-                options.Data = new Dictionary<string, PlayerDataObject>() {
-                    {
-                        "isSpectator", new PlayerDataObject(
-                            visibility: PlayerDataObject.VisibilityOptions.Public,
-                            value: isSpectator)
                     }
                 };
 
@@ -512,10 +507,6 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    public void CallUpdatePlayer1() {
-        OnChoosePlayer1?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
-    }
-
     public async void UpdatePlayer2(string player2) {
         if (AuthenticationService.Instance.PlayerId == _joinedLobby.HostId) {
             try {
@@ -540,14 +531,12 @@ public class LobbyManager : MonoBehaviour
 
                 // Trigger OnChoosePlayer2 event
                 OnChoosePlayer2?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+                Debug.Log("In UpdatePlayer2");
+                PrintPlayers(_joinedLobby);
             } catch (LobbyServiceException e) {
                 Debug.Log(e);
             }
         }
-    }
-
-    public void CallUpdatePlayer2() {
-        OnChoosePlayer2?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
     }
 
     /// <summary>
@@ -599,8 +588,6 @@ public class LobbyManager : MonoBehaviour
             });
 
             _joinedLobby = _hostLobby;
-
-            //PrintPlayers(_hostLobby);
 
             OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
         } catch (LobbyServiceException e) {

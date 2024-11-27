@@ -15,11 +15,6 @@ public class PopulateChooseOpponentPlayer : MonoBehaviour
 
     void Awake() {
         _lobbyManager = GameObject.FindWithTag("LobbyManager").GetComponent<LobbyManager>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
         int i = 0;
         foreach(var player in _lobbyManager._joinedLobby.Players) {
             if (player.Id != _lobbyManager._joinedLobby.Data["Player1"].Value) {

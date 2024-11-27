@@ -2,16 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UpdatePlayer1 : MonoBehaviour
 {
-    private LobbyManager _lobbyManager;
+    private LobbyManager _lobbyManager; // Reference to Lobby Manager
+
     [SerializeField] 
-    private TMP_Text _playerNameUI;
+    private TMP_Text _playerNameUI; // // Displays Player1 PlayerName
 
     void Awake() {
+        // Populate _lobbyManager
         _lobbyManager = GameObject.FindWithTag("LobbyManager").GetComponent<LobbyManager>();
     }
 
@@ -23,18 +26,16 @@ public class UpdatePlayer1 : MonoBehaviour
 
         // Subscribe to OnChoosePlayer1 event
         _lobbyManager.OnChoosePlayer1  += HandleOnUpdatePlayer1;
-
-        // trigger OnChoosePlayer1 event
-        _lobbyManager.CallUpdatePlayer1();
     }
 
     /// <summary>
-    /// 
+    /// Gets PlayerName from Player1 and updates _playerNameUI to match
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
     private void HandleOnUpdatePlayer1(object sender, LobbyManager.LobbyEventArgs e) {
-        string _playerName = _lobbyManager.GetPlayer(e.lobby, e.lobby.Data["Player1"].Value);
+        Player _player = _lobbyManager.GetPlayer(e.lobby, e.lobby.Data["Player1"].Value);
+        string _playerName = _player.Data["PlayerName"].Value;
         _playerNameUI.text = _playerName;
     }
 
