@@ -13,7 +13,6 @@ public class PopulateTriviaScene : MonoBehaviour
     // private ... Declare the question textbox here
     private TextMeshProUGUI _questionText;
 
-
     [Header("Button Settings ---------")]
     [SerializeField] 
     // private ... Declare the right button here
@@ -51,7 +50,6 @@ public class PopulateTriviaScene : MonoBehaviour
 
         // Update background
         _videoPlayer.clip = _osopher.osopherVideo;
-
 
         // Get Question
         // Randomly generate a number x between 0 and 2 inclusive
