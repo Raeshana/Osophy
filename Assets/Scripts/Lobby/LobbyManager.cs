@@ -235,7 +235,9 @@ public class LobbyManager : MonoBehaviour
                 {"Osopher2", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
                 {"Osopher3", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
                 {"Debater", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
-                {"numCards", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "3")}
+                {"numCards", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "3")},
+                {"isCorrect", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "false")},
+                {"answerTime", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "0")}
             }
         };
     }
@@ -307,6 +309,7 @@ public class LobbyManager : MonoBehaviour
     /// <summary>
     /// Updates player's opponent when player is Player1,
     /// Used by host to populate Player2
+    /// Used to update Player2 in Lobby metadata
     /// </summary>
     /// <param name="newPlayerName"> Changed player name </param>
     public async void UpdatePlayerOpponent(string newPlayerOpponent) {
@@ -332,7 +335,7 @@ public class LobbyManager : MonoBehaviour
                 // Trigger OnChoosePlayer2 event
                 OnChoosePlayer2?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
 
-                PrintPlayers(_joinedLobby);
+                // PrintPlayers(_joinedLobby);
             } catch (LobbyServiceException e) {
                 Debug.Log(e); 
             }   
@@ -378,6 +381,8 @@ public class LobbyManager : MonoBehaviour
 
                 // Trigger OnJoinedLobbyUpdate event
                 OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+
+                // PrintPlayers(_joinedLobby);
             } catch (LobbyServiceException e) {
                 Debug.Log(e); 
             }   
@@ -387,6 +392,7 @@ public class LobbyManager : MonoBehaviour
     /// <summary>
     /// Called by event handler when a player's debater is updated
     /// so that it can be updated across all clients
+    /// Used to update TriviaSceneSpectator scene
     /// </summary>
     /// <param name="debater"></param>
     public async void UpdatePlayerDebater(string debater) {
@@ -409,6 +415,8 @@ public class LobbyManager : MonoBehaviour
 
                 // Trigger OnJoinedLobbyUpdate event
                 OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+
+                // PrintPlayers(_joinedLobby);
             } catch (LobbyServiceException e) {
                 Debug.Log(e); 
             }   
@@ -418,6 +426,7 @@ public class LobbyManager : MonoBehaviour
     /// <summary>
     /// Called by event handler when a player's card number is updated
     /// so that it can be updated across all clients
+    /// Used to determine overall winner
     /// </summary>
     /// <param name="numCards"></param>
     public async void UpdatePlayerNumCards(string numCards) {
@@ -440,11 +449,81 @@ public class LobbyManager : MonoBehaviour
 
                 // Trigger OnJoinedLobbyUpdate event
                 OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+
+                // PrintPlayers(_joinedLobby);
             } catch (LobbyServiceException e) {
                 Debug.Log(e); 
             }   
         }
     }
+
+    /// <summary>
+    /// Called by event handler when a player chooses an answer
+    /// so that it can be updated across all clients
+    /// true : player chose the correct answer
+    /// false : player chose the wrong answer
+    /// Used to determine round winner
+    /// </summary>
+    /// <param name="isCorrect"></param>
+    public async void UpdatePlayerCorrect(string isCorrect) {
+        if (_joinedLobby != null) {
+            try {
+                UpdatePlayerOptions options = new UpdatePlayerOptions();
+
+                options.Data = new Dictionary<string, PlayerDataObject>() {
+                    {
+                        "isCorrect", new PlayerDataObject(
+                            visibility: PlayerDataObject.VisibilityOptions.Public,
+                            value: isCorrect)
+                    }
+                };
+
+                // Update Lobby with new player information
+                string playerId = AuthenticationService.Instance.PlayerId;
+                Lobby lobby = await LobbyService.Instance.UpdatePlayerAsync(_joinedLobby.Id, playerId, options);
+                _joinedLobby = lobby;
+
+                // Trigger OnJoinedLobbyUpdate event
+                OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+                
+                PrintPlayers(_joinedLobby);
+            } catch (LobbyServiceException e) {
+                Debug.Log(e); 
+            }   
+        }
+    }
+
+    /// <summary>
+    /// Called by event handler when a player answers a question
+    /// so the time they took to answer can be updated across all clients
+    /// Used to determine round winner
+    /// </summary>
+    /// <param name="answerTime"></param>
+    public async void UpdatePlayerAnswerTime(string answerTime) {
+        if (_joinedLobby != null) {
+            try {
+                UpdatePlayerOptions options = new UpdatePlayerOptions();
+
+                options.Data = new Dictionary<string, PlayerDataObject>() {
+                    {
+                        "answerTime", new PlayerDataObject(
+                            visibility: PlayerDataObject.VisibilityOptions.Public,
+                            value: answerTime)
+                    }
+                };
+
+                // Update Lobby with new player information
+                string playerId = AuthenticationService.Instance.PlayerId;
+                Lobby lobby = await LobbyService.Instance.UpdatePlayerAsync(_joinedLobby.Id, playerId, options);
+                _joinedLobby = lobby;
+
+                // Trigger OnJoinedLobbyUpdate event
+                OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+            } catch (LobbyServiceException e) {
+                Debug.Log(e); 
+            }   
+        }
+    }    
 
     /// <summary>
     /// Randomly choose a player to player first from those in the Lobby

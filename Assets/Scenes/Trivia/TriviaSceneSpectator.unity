@@ -203,14 +203,14 @@ PrefabInstance:
     - target: {fileID: 124888128734197598, guid: a4b68460aaf7e3a40a061d0ae6fe6b08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 942902299}
+      objectReference: {fileID: 845855145}
     - target: {fileID: 124888128734197598, guid: a4b68460aaf7e3a40a061d0ae6fe6b08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToWrongScene
+      value: WrongAnswerButton
       objectReference: {fileID: 0}
     - target: {fileID: 124888128734197598, guid: a4b68460aaf7e3a40a061d0ae6fe6b08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SceneController, Assembly-CSharp
+      value: AnswerButtons, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 124888128734197598, guid: a4b68460aaf7e3a40a061d0ae6fe6b08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -318,7 +318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5615585418622232002, guid: a4b68460aaf7e3a40a061d0ae6fe6b08, type: 3}
       propertyPath: m_fontSize
-      value: 53.15
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 5615585418622232002, guid: a4b68460aaf7e3a40a061d0ae6fe6b08, type: 3}
       propertyPath: m_fontColor.b
@@ -382,7 +382,6 @@ GameObject:
   - component: {fileID: 693809824}
   - component: {fileID: 693809823}
   - component: {fileID: 693809822}
-  - component: {fileID: 693809826}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -477,23 +476,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &693809826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693809821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bcd5674251784b79bb4d9a08b849f58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rightAnswerButton: {fileID: 1770823328}
-  _wrongAnswerButton: {fileID: 584606282}
-  _buttonLocs:
-  - {fileID: 345901606}
-  - {fileID: 111927113}
 --- !u!1 &788026058
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,8 +573,10 @@ GameObject:
   m_Component:
   - component: {fileID: 845855143}
   - component: {fileID: 845855142}
+  - component: {fileID: 845855144}
+  - component: {fileID: 845855145}
   m_Layer: 0
-  m_Name: UI Script
+  m_Name: UI Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -631,6 +615,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &845855144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845855141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bcd5674251784b79bb4d9a08b849f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rightAnswerButton: {fileID: 1770823328}
+  _wrongAnswerButton: {fileID: 584606282}
+  _buttonLocs:
+  - {fileID: 345901606}
+  - {fileID: 111927113}
+--- !u!114 &845855145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845855141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13bb9ee8bf17bdc469d3d28050ee2121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCorrectAnswer: 0
+  _answerText: {fileID: 2002142869}
 --- !u!328 &853749409 stripped
 VideoPlayer:
   m_CorrespondingSourceObject: {fileID: 4057464709581882880, guid: 250d348d12f29d745b47a86780f5f96e, type: 3}
@@ -704,51 +719,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3050193f43377814d8238e49d3198680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1449609628
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1449609630}
-  - component: {fileID: 1449609629}
-  m_Layer: 0
-  m_Name: test
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1449609629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1449609628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5419df09024114e428f0f9d69b3faf3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerOsopherDict: {fileID: 1907244970}
---- !u!4 &1449609630
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1449609628}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1747660944
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,14 +806,14 @@ PrefabInstance:
     - target: {fileID: 124888128734197598, guid: a4b68460aaf7e3a40a061d0ae6fe6b08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 942902299}
+      objectReference: {fileID: 845855145}
     - target: {fileID: 124888128734197598, guid: a4b68460aaf7e3a40a061d0ae6fe6b08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToRightScene
+      value: CorrectAnswerButton
       objectReference: {fileID: 0}
     - target: {fileID: 124888128734197598, guid: a4b68460aaf7e3a40a061d0ae6fe6b08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SceneController, Assembly-CSharp
+      value: AnswerButtons, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 124888128734197598, guid: a4b68460aaf7e3a40a061d0ae6fe6b08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -944,6 +914,10 @@ PrefabInstance:
     - target: {fileID: 5468806852771969551, guid: a4b68460aaf7e3a40a061d0ae6fe6b08, type: 3}
       propertyPath: m_Color.r
       value: 0.3882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 5615585418622232002, guid: a4b68460aaf7e3a40a061d0ae6fe6b08, type: 3}
+      propertyPath: m_fontSize
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 5615585418622232002, guid: a4b68460aaf7e3a40a061d0ae6fe6b08, type: 3}
       propertyPath: m_fontColor.b
@@ -1123,7 +1097,7 @@ MonoBehaviour:
   m_text: is this a question?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e6eb4182e11b663488fc4805f3011337, type: 2}
-  m_sharedMaterial: {fileID: 3853662774259908611, guid: e6eb4182e11b663488fc4805f3011337, type: 2}
+  m_sharedMaterial: {fileID: -8143383715673364383, guid: e6eb4182e11b663488fc4805f3011337, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1544,7 +1518,6 @@ SceneRoots:
   - {fileID: 693809825}
   - {fileID: 1907244969}
   - {fileID: 942902298}
-  - {fileID: 1449609630}
   - {fileID: 845855143}
   - {fileID: 345901606}
   - {fileID: 111927113}
