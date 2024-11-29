@@ -15,6 +15,7 @@ MonoBehaviour:
   osopherName: Aristotle
   osopherTitle: '""'
   osopherImage: {fileID: 21300000, guid: 96f81cc8cc082614a8c2830c57605d49, type: 3}
+  osopherVideo: {fileID: 32900000, guid: 6ddeaf16fac744c4383d3c2ab57d9598, type: 3}
   osopherQuestions:
   - {fileID: 11400000, guid: 81dea38db382340bda4ce91ad5d21c28, type: 2}
   - {fileID: 11400000, guid: b9a5a094527c64fb4bfd21e7ca270a1d, type: 2}

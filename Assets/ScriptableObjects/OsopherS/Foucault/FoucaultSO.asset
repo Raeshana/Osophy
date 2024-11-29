@@ -15,6 +15,7 @@ MonoBehaviour:
   osopherName: Foucault
   osopherTitle: '""'
   osopherImage: {fileID: 21300000, guid: 3dfed200354ac98428dd184606b74eb5, type: 3}
+  osopherVideo: {fileID: 32900000, guid: c001fe50b0867f9449200ce1ef3da669, type: 3}
   osopherQuestions:
   - {fileID: 11400000, guid: 38d62c60e528443be94e4d36184b9358, type: 2}
   - {fileID: 11400000, guid: eece605252a014dfa8737de39c8c3971, type: 2}

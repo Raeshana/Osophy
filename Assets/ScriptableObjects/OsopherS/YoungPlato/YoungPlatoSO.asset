@@ -15,6 +15,7 @@ MonoBehaviour:
   osopherName: Young Plato
   osopherTitle: '""'
   osopherImage: {fileID: 21300000, guid: 0d6186280b3ed284f99bcdf64f05f0ca, type: 3}
+  osopherVideo: {fileID: 32900000, guid: b93455ba363072f45953c88845d827da, type: 3}
   osopherQuestions:
   - {fileID: 11400000, guid: fbd8289cb9a8643d2ae1e3500e881822, type: 2}
   - {fileID: 11400000, guid: 05255b5b61b14409d9151399432ee85c, type: 2}

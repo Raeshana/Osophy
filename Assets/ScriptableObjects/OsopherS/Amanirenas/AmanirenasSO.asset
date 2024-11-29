@@ -15,6 +15,7 @@ MonoBehaviour:
   osopherName: Queen Amanirenas
   osopherTitle: '""'
   osopherImage: {fileID: 21300000, guid: a74a0a5163626114d9ad992c2c92aa3f, type: 3}
+  osopherVideo: {fileID: 32900000, guid: 577813a44891a4444a73e1e1918ee055, type: 3}
   osopherQuestions:
   - {fileID: 11400000, guid: d59cf544c690140a18ca8df6116009e3, type: 2}
   - {fileID: 11400000, guid: f6443722d738b473cb9e12e59d76635d, type: 2}

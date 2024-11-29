@@ -15,6 +15,7 @@ MonoBehaviour:
   osopherName: Diogenes
   osopherTitle: '""'
   osopherImage: {fileID: 21300000, guid: b979d595cdba5564ba485bee17aabd9f, type: 3}
+  osopherVideo: {fileID: 32900000, guid: b06a7e08cb6f73941a4d97200a152cae, type: 3}
   osopherQuestions:
   - {fileID: 11400000, guid: 04fd6d9b4179e1a44a80905ec5a64635, type: 2}
   - {fileID: 11400000, guid: e001c37b6e3262a468a91b8d86a0f1b0, type: 2}

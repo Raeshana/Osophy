@@ -15,6 +15,7 @@ MonoBehaviour:
   osopherName: Protagoras
   osopherTitle: '""'
   osopherImage: {fileID: 21300000, guid: 9a399489d3c9e6b49ba1afa5924570ef, type: 3}
+  osopherVideo: {fileID: 32900000, guid: d9db2af10e6b26340bb810b99ce1583c, type: 3}
   osopherQuestions:
   - {fileID: 11400000, guid: db9057588e994426091dfaa484c18ad5, type: 2}
   - {fileID: 11400000, guid: d72178a8fe1ff4f8086f590467e92df0, type: 2}

@@ -15,6 +15,7 @@ MonoBehaviour:
   osopherName: Hildegard
   osopherTitle: '""'
   osopherImage: {fileID: 21300000, guid: 307d2de6178bab44bb88e83a43cf559f, type: 3}
+  osopherVideo: {fileID: 32900000, guid: b9984ff3818107048bb4d4700f7b26fe, type: 3}
   osopherQuestions:
   - {fileID: 11400000, guid: eed00a4c8fab2482492e3dc8e2eeda9d, type: 2}
   - {fileID: 11400000, guid: d3c8df62b50424f39bb0e94ad835f99f, type: 2}
