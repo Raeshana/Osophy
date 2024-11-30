@@ -7,6 +7,7 @@ using System.Timers;
 public class Timer : MonoBehaviour
 {
     [Header("Timer Settings ---------")]
+    [SerializeField]
     private TMP_Text _timerText; // Text to display remaining time
     [SerializeField] 
     private GameObject _timer; // Timer gameobject (Enable after 8 seconds)
@@ -16,15 +17,14 @@ public class Timer : MonoBehaviour
     [Header("Asnwer Settings ---------")]
     [SerializeField]
     private TMP_Text _answertext; // When time runs out, display if answer is correct
-    [SerializeField]
-    private AnswerButtons answerButtons; // Script containing whether answer was correct or not
+    private AnswerButtons _answerButtons; // Script containing whether answer was correct or not
 
     [Header("Scene Settings ---------")]
     [SerializeField] 
     private SceneController sceneController; // Scene Controller reference
 
     void Awake() {
-        _timerText = GetComponent<TMP_Text>();
+        _answerButtons = GetComponent<AnswerButtons>();
     }
 
     void Start() {
@@ -32,7 +32,7 @@ public class Timer : MonoBehaviour
     }
 
     private IEnumerator GenerateTimerRoutine() {
-        yield return new WaitForSeconds(8);
+        yield return new WaitForSeconds(7);
         _timer.SetActive(true);
     } 
 
@@ -46,7 +46,7 @@ public class Timer : MonoBehaviour
         else if (_remainingTime < 0) {
             // Display if answer is correct
             _remainingTime = 0;
-            if (answerButtons.isCorrectAnswer) {
+            if (_answerButtons.isCorrectAnswer) {
                 _answertext.text = "Correct!";
                 StartCoroutine(GoToRightSceneRoutine());
             }  

@@ -271,6 +271,8 @@ public class LobbyManager : MonoBehaviour
             Debug.Log("Osopher 3: " + player.Data["Osopher3"].Value);
             Debug.Log("Player Debater: " + player.Data["Debater"].Value);
             Debug.Log("numCards: " + player.Data["numCards"].Value);
+            Debug.Log("isCorrect: " + player.Data["isCorrect"].Value);
+            Debug.Log("answerTime: " + player.Data["answerTime"].Value);
         }
     }
 

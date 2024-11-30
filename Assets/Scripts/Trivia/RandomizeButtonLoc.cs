@@ -22,7 +22,7 @@ public class RandomizeButtonLoc : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     private IEnumerator GenerateButtonRoutine() {
-        yield return new WaitForSeconds (8);
+        yield return new WaitForSeconds (7);
 
         int _idx = Random.Range(0, 2); // Generate a random index between 0 and 1
 
