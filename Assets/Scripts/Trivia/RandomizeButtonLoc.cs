@@ -26,6 +26,10 @@ public class RandomizeButtonLoc : MonoBehaviour
 
         int _idx = Random.Range(0, 2); // Generate a random index between 0 and 1
 
+        //Enable button active
+        _rightAnswerButton.SetActive(true);
+        _wrongAnswerButton.SetActive(true);
+
         // Assign the right answer button to a location
         _rightAnswerButton.transform.position = _buttonLocs[_idx].position;
         // Debug.Log("Right Answer Button Position: " + _rightAnswerButton.transform.position);

@@ -45,8 +45,10 @@ public class PopulateTriviaScene : MonoBehaviour
         // gets osopher "Socrates" and makes an osopher instance (object)
         // "Socrates" is just for alpha testing
         OsopherSO _osopher;
-        Debug.Log(PlayerDebater.debater);
+        Debug.Log("Debater: " + PlayerDebater.debater);
+        _playerOsopherDict.PrintOsophers();
         _osopher = _playerOsopherDict.GetOsopherSO(PlayerDebater.debater); 
+        Debug.Log("_osopher received: " + _osopher.name);
 
         // Update background
         _videoPlayer.clip = _osopher.osopherVideo;
