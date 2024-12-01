@@ -189,6 +189,8 @@ public class QRCodeScanner : MonoBehaviour
         }
         else {
             _text.text = "Oops, this isn't an Osopher! Scan again!";
+
+            // CHANGE INSTRUCTIONS IMAGE COLOUR TO RED
         }
     }
 
@@ -214,10 +216,14 @@ public class QRCodeScanner : MonoBehaviour
             }   
             else {
                 _text.text = "Oops, you don't have this Osopher! Scan again!";
+
+                // CHANGE INSTRUCTIONS IMAGE COLOUR TO RED
             }
         }
         else {
             _text.text = "Oops, this isn't an Osopher! Scan again!";
+
+            // CHANGE INSTRUCTIONS IMAGE COLOUR TO RED
         }
     }
 
@@ -280,15 +286,21 @@ public class QRCodeScanner : MonoBehaviour
 
                 function(result.Text); // Call InitialScan or GameplayScan
 
+                // CHANGE INSTRUCTIONS IMAGE COLOUR TO GREEN
+
                 //ResetCamera(); // Reset camera for debugging
                 //Debug.Log(result.Text);
             } 
             else {
                 _text.text = "Oops! Scan again!";
+
+                // CHANGE INSTRUCTIONS IMAGE COLOUR TO RED
             }
         } catch (Exception ex) {
             _text.text = "Oops! Scan again!";
             Debug.LogError("Scan Error: " + ex.Message + "\n" + ex.StackTrace);
+
+            // CHANGE INSTRUCTIONS IMAGE COLOUR TO RED
     }
     }
 }
