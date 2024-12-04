@@ -56,7 +56,10 @@ public class SceneController : MonoBehaviour
     public void CloseCreditsScene(){
         SceneManager.UnloadSceneAsync("Credits");
     }
-
+    
+    public void GoToMainMenu(){
+        SceneManager.LoadScene("MainMenu");
+    }
     public void GoToLobby(){
         SceneManager.LoadScene("Lobby");
     }
