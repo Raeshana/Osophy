@@ -49,6 +49,14 @@ public class SceneController : MonoBehaviour
 
     }
 
+    public void GoToCreditsScene(){
+        SceneManager.LoadScene("Credits", LoadSceneMode.Additive);
+    }
+    
+    public void CloseCreditsScene(){
+        SceneManager.UnloadSceneAsync("Credits");
+    }
+
     public void GoToLobby(){
         SceneManager.LoadScene("Lobby");
     }
