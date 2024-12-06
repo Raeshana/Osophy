@@ -124,10 +124,10 @@ public class QRCodeScanner : MonoBehaviour
         int orientation = -_camTex.videoRotationAngle;
 
         // PC/ Android Builds
-        // _background.rectTransform.localEulerAngles = new Vector3(0, 0, orientation);
+        _background.rectTransform.localEulerAngles = new Vector3(0, 0, orientation);
 
         // IOS Builds
-        _background.rectTransform.localEulerAngles = new Vector3(0, 180, orientation);
+        // _background.rectTransform.localEulerAngles = new Vector3(0, 180, orientation);
     }
 
     /// <summary>
