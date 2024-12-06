@@ -98,12 +98,12 @@ public class QRCodeScanner : MonoBehaviour
 
         for (int i = 0; i < devices.Length; i++) {
             // Android/ IOS Builds
-            if (!devices[i].isFrontFacing) {
-                _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
-            }
+            // if (!devices[i].isFrontFacing) {
+            //     _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
+            // }
 
             // PC Build
-            // _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
+            _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
         }
 
         _camTex.Play();
@@ -165,6 +165,14 @@ public class QRCodeScanner : MonoBehaviour
     }
 
     /// <summary>
+    /// Calls this function when scan is clicked during
+    /// gameplay scanning
+    /// </summary>
+    public void OnlickRoundScan() {
+        Scan(RoundScan);
+    }
+
+    /// <summary>
     /// Allows initial scan to be passed as a parameter
     /// </summary>
     /// <param name="text"></param>
@@ -181,7 +189,7 @@ public class QRCodeScanner : MonoBehaviour
         if (_gameOsopherDict.FindOsopher(text)) {
             _playerOsopherDict.AddOsopher(text);
             ChangePanel(text);
-            ManageOsopherNumInitial();
+            ManageOsopherNum();
         }
         else {
             _text.text = "Oops, this isn't an Osopher! Scan again!";
@@ -224,6 +232,26 @@ public class QRCodeScanner : MonoBehaviour
     }
 
     /// <summary>
+    /// Called at the end of a round for debating players
+    /// If an Osopher is valid, 
+    /// Adds them to the player Osopher dict and
+    /// Decrements the number of remaining Osophers to scan
+    /// </summary>
+    /// <param name="text"></param>
+    private void RoundScan(string text) {
+        if (_gameOsopherDict.FindOsopher(text)) {
+            _playerOsopherDict.AddOsopher(text);
+            ChangePanel(text);
+            ManageOsopherNum();
+        }
+        else {
+            _text.text = "Oops, this isn't an Osopher! Scan again!";
+
+            // CHANGE INSTRUCTIONS IMAGE COLOUR TO RED
+        }
+    }
+
+    /// <summary>
     /// Change blank panels to scanned Osophers
     /// </summary>
     /// <param name="text"> Text read from QR code </param>
@@ -237,7 +265,7 @@ public class QRCodeScanner : MonoBehaviour
     /// Osopher is scanned in
     /// If all osophers were scanned, go to next scene
     /// </summary>
-    private void ManageOsopherNumInitial() {
+    private void ManageOsopherNum() {
         _osopherNumCurr--;
         if (_osopherNumCurr <= 0) {
             _playerOsopherDict.UpdatePlayerOsophers();

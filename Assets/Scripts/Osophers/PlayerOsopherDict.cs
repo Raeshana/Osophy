@@ -36,10 +36,24 @@ public class PlayerOsopherDict : MonoBehaviour
     /// </summary>
     /// <param name="osopherName"> Name of Osopher you would like to add </param>
     public void AddOsopher(string osopherName) {
-        // if (!FindOsopher(osopherName)) {
+        if (!FindOsopher(osopherName)) {
             osopherDict.Add(osopherName, _gameOsopherDict.GetOsopherSO(osopherName));
             _osophers.Add(osopherName);
-        // }
+        }
+    }
+
+    /// <summary>
+    /// Removes an Osopher from the player Osopher dict
+    /// </summary>
+    /// <param name="osopherName"> Name of Osopher you would like to add </param>
+    public void DeleteOsopher(string osopherName) {
+        if (!FindOsopher(osopherName)) {
+            osopherDict.Remove(osopherName);
+            if (_osophers.Contains(osopherName))
+            {
+                _osophers.Remove(osopherName);
+            }
+        }
     }
 
     /// <summary>
@@ -87,7 +101,12 @@ public class PlayerOsopherDict : MonoBehaviour
     /// <returns> true if osopherName exists in player Osopher dict, 
     /// false otherwise </returns>
     public bool FindOsopher(string osopherName) {
-        return osopherDict[osopherName];
+        if (osopherDict.ContainsKey(osopherName))
+        {
+            return osopherDict[osopherName];
+        }
+        // Return false if the key does not exist
+        return false;
     }
 
     public void UpdateOsopherQuestion(QuestionSO question) {
