@@ -97,13 +97,13 @@ public class QRCodeScanner : MonoBehaviour
         }
 
         for (int i = 0; i < devices.Length; i++) {
-            // Uncomment for mobile build
-            // if (!devices[i].isFrontFacing) {
-            //     _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
-            // }
+            // Android/ IOS Builds
+            if (!devices[i].isFrontFacing) {
+                _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
+            }
 
-            // Comment for mobile build
-            _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
+            // PC Build
+            // _camTex = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
         }
 
         _camTex.Play();
@@ -122,16 +122,12 @@ public class QRCodeScanner : MonoBehaviour
         _aspectRatioFitter.aspectRatio = ratio;
 
         int orientation = -_camTex.videoRotationAngle;
-        _background.rectTransform.localEulerAngles = new Vector3(0, 0, orientation);
-        // bool mirrored = _camTex.videoVerticallyMirrored;
-        // if (mirrored)
-        // {
-        //     _background.rectTransform.localEulerAngles = new Vector3(0, 180, orientation);
-        // }
-        // else
-        // {
-        //     _background.rectTransform.localEulerAngles = new Vector3(0, 0, orientation);
-        // }
+
+        // PC/ Android Builds
+        // _background.rectTransform.localEulerAngles = new Vector3(0, 0, orientation);
+
+        // IOS Builds
+        _background.rectTransform.localEulerAngles = new Vector3(0, 180, orientation);
     }
 
     /// <summary>
