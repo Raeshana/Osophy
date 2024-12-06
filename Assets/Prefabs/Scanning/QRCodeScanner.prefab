@@ -56,8 +56,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  osopherNum: 3
+  _osopherNum: 3
   _sceneController: {fileID: 0}
+  imageComponent: {fileID: 0}
 --- !u!114 &6891337946725991861
 MonoBehaviour:
   m_ObjectHideFlags: 0
