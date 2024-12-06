@@ -492,6 +492,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &708997940 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5149009225875936439, guid: 20b8c5e01b2e925428b0a85dbfdd23c4, type: 3}
+  m_PrefabInstance: {fileID: 708997937}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &774949396
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,14 +590,22 @@ PrefabInstance:
     - target: {fileID: 1928580713167288133, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 71e688bc8c6db7449820f22d4708fbca, type: 3}
+      objectReference: {fileID: 21300000, guid: f6623bbe6829e4fecbdb47ceb58c0997, type: 3}
     - target: {fileID: 2073971420603869320, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
       propertyPath: m_text
-      value: 
+      value: Scan
       objectReference: {fileID: 0}
     - target: {fileID: 2073971420603869320, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
       propertyPath: m_fontSize
-      value: 36
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073971420603869320, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073971420603869320, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 3716323598519821733, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
       propertyPath: m_Name
@@ -603,7 +622,19 @@ PrefabInstance:
     - target: {fileID: 5808827939922246164, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 72c1ff025d98d8146971d38f55372534, type: 3}
+      objectReference: {fileID: 21300000, guid: 5b464e9d37ff54589954e1dcaa1c5d3c, type: 3}
+    - target: {fileID: 5808827939922246164, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
+      propertyPath: m_SpriteState.m_DisabledSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dbbecf6760831424ba781c318c13b055, type: 3}
+    - target: {fileID: 5808827939922246164, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ea4a09b0a533748d3a3c02ebc47952c6, type: 3}
+    - target: {fileID: 5808827939922246164, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5b464e9d37ff54589954e1dcaa1c5d3c, type: 3}
     - target: {fileID: 5808827939922246164, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -678,7 +709,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8552726776326921273, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -707
+      value: -700
       objectReference: {fileID: 0}
     - target: {fileID: 8552726776326921273, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1535,13 +1566,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1451068232}
     - target: {fileID: 4807693210022622069, guid: 39bea1e9e6e04f442a23d5b4ef1e3b61, type: 3}
-      propertyPath: _osopherNum
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4807693210022622069, guid: 39bea1e9e6e04f442a23d5b4ef1e3b61, type: 3}
       propertyPath: playerDebater
       value: 
       objectReference: {fileID: 7891509037094068387}
+    - target: {fileID: 4807693210022622069, guid: 39bea1e9e6e04f442a23d5b4ef1e3b61, type: 3}
+      propertyPath: imageComponent
+      value: 
+      objectReference: {fileID: 708997940}
     - target: {fileID: 4807693210022622069, guid: 39bea1e9e6e04f442a23d5b4ef1e3b61, type: 3}
       propertyPath: _gameOsopherDict
       value: 
