@@ -864,4 +864,16 @@ public class LobbyManager : MonoBehaviour
             _sceneController.GoToSpectatorScene();
         }
     }
+
+    public void GoToRoundScanningScene() {
+        string _playerID = AuthenticationService.Instance.PlayerId;
+        if (((_playerID == _joinedLobby.Data["Player1"].Value) ||
+            (_playerID == _joinedLobby.Data["Player2"].Value)) &&
+            _playerID == _joinedLobby.Data["RoundWinner"].Value) {
+            _sceneController.GoToRoundQRScanningScene();
+        }
+        else {
+            _sceneController.GoToRoundSpectatorScene();
+        }
+    }
 }

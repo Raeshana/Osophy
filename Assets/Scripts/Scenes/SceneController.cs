@@ -112,4 +112,12 @@ public class SceneController : MonoBehaviour
     public void GoToPlayerTurnScene(){
         SceneManager.LoadScene("PlayerTurnScene");
     }
+
+    public void GoToRoundQRScanningScene(){
+        SceneManager.LoadScene("RoundScanningScene");
+    }
+
+     public void GoToRoundSpectatorScene(){
+        SceneManager.LoadScene("RoundSpectatorScene");
+    }
 }
