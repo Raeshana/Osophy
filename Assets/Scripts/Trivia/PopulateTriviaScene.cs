@@ -56,8 +56,11 @@ public class PopulateTriviaScene : MonoBehaviour
         // Get Question
         // Randomly generate a number x between 0 and 2 inclusive
         int rand = Random.Range(0, 2);
-        // Declare a QuestionSO _question
 
+        // Update Player QuestionNum metadata
+        LobbyManager.Instance.UpdatePlayerQuestionNum(rand.ToString()); 
+
+        // Declare a QuestionSO _question
         // Populate _question with the questionSO of index x under _socrates
         QuestionSO _question;
         _question = _osopher.osopherQuestions[rand];

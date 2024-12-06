@@ -685,6 +685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCorrectAnswer: 0
   _answerText: {fileID: 2002142869}
+  _remainingTime: 7
 --- !u!114 &845855146
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -48,17 +48,23 @@ public class Timer : MonoBehaviour
             _remainingTime = 0;
             if (_answerButtons.isCorrectAnswer) {
                 _answertext.text = "Correct!";
-                StartCoroutine(GoToRightSceneRoutine());
+                // StartCoroutine(GoToRightSceneRoutine());
             }  
             else {
                 _answertext.text = "Wrong!";
-                StartCoroutine(GoToWrongSceneRoutine());
+                // StartCoroutine(GoToWrongSceneRoutine());
             }
+            StartCoroutine(GoToWaitingForAnswersSceneRoutine());
         }
 
         int minutes = Mathf.FloorToInt(_remainingTime / 60);
         int seconds = Mathf.FloorToInt(_remainingTime % 60);
         _timerText.text = string.Format("{0:00}:{1:00} s", minutes, seconds);
+    }
+
+    IEnumerator GoToWaitingForAnswersSceneRoutine() {
+        yield return new WaitForSeconds(6);
+        sceneController.GoToWaitingForAnswersScene();
     }
 
     IEnumerator GoToRightSceneRoutine() {
