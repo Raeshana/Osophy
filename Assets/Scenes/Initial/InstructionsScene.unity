@@ -201,7 +201,7 @@ PrefabInstance:
     - target: {fileID: 4057464709581882880, guid: 250d348d12f29d745b47a86780f5f96e, type: 3}
       propertyPath: m_VideoClip
       value: 
-      objectReference: {fileID: 32900000, guid: 63009c39a4bf64f02b0803356bb806e2, type: 3}
+      objectReference: {fileID: 32900000, guid: 1a77825b870a247c6bc3548d64377c4c, type: 3}
     - target: {fileID: 5687578526932452538, guid: 250d348d12f29d745b47a86780f5f96e, type: 3}
       propertyPath: m_Name
       value: VideoManager
