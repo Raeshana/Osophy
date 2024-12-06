@@ -13,6 +13,7 @@ public class PlayerOsopherDict : MonoBehaviour
     private GameOsopherDict _gameOsopherDict; 
 
     public event EventHandler OnAddOsopher;
+    public event EventHandler OnRemoveOsopher;
 
     private List<string> _osophers = new List<string>();
 
@@ -26,6 +27,7 @@ public class PlayerOsopherDict : MonoBehaviour
     void Start() {
         // Subscribe to HandleOnAddOsopher
         OnAddOsopher += HandleOnAddOsopher;
+        OnRemoveOsopher += HandleOnRemoveOsopher;
     }
 
     /// <summary>
@@ -47,13 +49,14 @@ public class PlayerOsopherDict : MonoBehaviour
     /// Removes an Osopher from the player Osopher dict
     /// </summary>
     /// <param name="osopherName"> Name of Osopher you would like to add </param>
-    public void DeleteOsopher(string osopherName) {
+    public void RemoveOsopher(string osopherName) {
         if (!FindOsopher(osopherName)) {
             osopherDict.Remove(osopherName);
             if (_osophers.Contains(osopherName))
             {
                 _osophers.Remove(osopherName);
             }
+            OnRemoveOsopher?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -63,7 +66,20 @@ public class PlayerOsopherDict : MonoBehaviour
     /// <param name="sender"></param>
     /// <param name="e"></param>
     private void HandleOnAddOsopher(object sender, EventArgs e) {
+        // Update Player Osophers 
         LobbyManager.Instance.UpdatePlayerOsophers(_osophers[0], _osophers[1], _osophers[2]);
+        // Increment Player NumCards
+        LobbyManager.Instance.IncrementPlayerNumCards();
+    }
+
+    /// <summary>
+    /// Updates Osopher1, Osopher2, and Osopher3 player metadata
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void HandleOnRemoveOsopher(object sender, EventArgs e) {
+        // Decrement Player NumCards
+        LobbyManager.Instance.DecrementPlayerNumCards();
     }
 
     /// <summary>

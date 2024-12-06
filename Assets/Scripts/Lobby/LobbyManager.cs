@@ -470,6 +470,22 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
+    public void IncrementPlayerNumCards() {
+        Player _player = GetPlayer(_joinedLobby, AuthenticationService.Instance.PlayerId);
+        string _numCardsStr = _player.Data["numCards"].Value;
+        int _numCardsInt = int.Parse (_numCardsStr);
+        int _numCardsInc = _numCardsInt + 1;
+        UpdatePlayerNumCards(_numCardsInc.ToString());
+    }
+
+    public void DecrementPlayerNumCards() {
+        Player _player = GetPlayer(_joinedLobby, AuthenticationService.Instance.PlayerId);
+        string _numCardsStr = _player.Data["numCards"].Value;
+        int _numCardsInt = int.Parse (_numCardsStr);
+        int _numCardsDec = _numCardsInt - 1;
+        UpdatePlayerNumCards(_numCardsDec.ToString());
+    }
+
     /// <summary>
     /// Called by event handler when a player's card number is updated
     /// so that it can be updated across all clients
