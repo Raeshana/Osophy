@@ -216,7 +216,7 @@ public class QRCodeScanner : MonoBehaviour
             if (_playerOsopherDict.FindOsopher(text)) {
                 playerDebater.AssignDebater(text);
                 ChangePanel(text);
-                ManageOsopherNumGameplay();
+                ManageOsopherNum();
             }   
             else {
                 _text.text = "Oops, you don't have this Osopher! Scan again!";
@@ -266,19 +266,6 @@ public class QRCodeScanner : MonoBehaviour
     /// If all osophers were scanned, go to next scene
     /// </summary>
     private void ManageOsopherNum() {
-        _osopherNumCurr--;
-        if (_osopherNumCurr <= 0) {
-            _playerOsopherDict.UpdatePlayerOsophers();
-            StartCoroutine(WaitForPlayerUpdates());
-        }
-    }
-
-    /// <summary>
-    /// Decrement _osopherNum when a valid
-    /// Osopher is scanned in
-    /// If all osophers were scanned, go to next scene
-    /// </summary>
-    private void ManageOsopherNumGameplay() {
         _osopherNumCurr--;
         if (_osopherNumCurr <= 0) {
             StartCoroutine(WaitForPlayerUpdates());

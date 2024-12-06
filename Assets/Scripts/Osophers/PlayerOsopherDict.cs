@@ -39,6 +39,7 @@ public class PlayerOsopherDict : MonoBehaviour
         if (!FindOsopher(osopherName)) {
             osopherDict.Add(osopherName, _gameOsopherDict.GetOsopherSO(osopherName));
             _osophers.Add(osopherName);
+            OnAddOsopher?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -54,13 +55,6 @@ public class PlayerOsopherDict : MonoBehaviour
                 _osophers.Remove(osopherName);
             }
         }
-    }
-
-    /// <summary>
-    /// Trigger OnAddOsopher event
-    /// </summary>
-    public void UpdatePlayerOsophers() {
-        OnAddOsopher?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
