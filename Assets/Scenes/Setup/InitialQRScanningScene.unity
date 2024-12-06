@@ -630,7 +630,7 @@ PrefabInstance:
     - target: {fileID: 5808827939922246164, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
       propertyPath: m_SpriteState.m_SelectedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 5b464e9d37ff54589954e1dcaa1c5d3c, type: 3}
+      objectReference: {fileID: 21300000, guid: ea4a09b0a533748d3a3c02ebc47952c6, type: 3}
     - target: {fileID: 5808827939922246164, guid: 71a7f5619349e0444b7eff7267b3cab6, type: 3}
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
