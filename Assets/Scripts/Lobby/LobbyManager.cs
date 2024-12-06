@@ -267,6 +267,15 @@ public class LobbyManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Finds a player's name given their ID
+    /// </summary>
+    /// <param name="playerId"></param>
+    /// <returns> Name of a player whose ID matches playerID </returns>
+    public string GetCurrentPlayerID() {
+        return AuthenticationService.Instance.PlayerId;
+    }
+
+    /// <summary>
     /// Prints each player's metadata to the terminal
     /// </summary>
     /// <param name="lobby"></param>

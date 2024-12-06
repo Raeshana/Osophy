@@ -56,6 +56,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndOfRound/EndOfRoundScene.unity
     guid: 6b6ec223bf7cc6a4987bdccbabdfba03
+  - enabled: 1
+    path: Assets/Scenes/EndOfRound/RoundQRScanningScene.unity
+    guid: af933aa9ad9973345b7592ae3582f55a
   - enabled: 0
     path: Assets/Scenes/Trivia/RightScene.unity
     guid: c665c5c80e6d34d44b55101d7f1c21b5
