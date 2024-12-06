@@ -22,9 +22,6 @@ public class PopulateEngineScene : MonoBehaviour
     [SerializeField]
     private TMP_Text _roundWinnerMessage; // TMP_Text displaying message
 
-    [SerializeField]
-    private SceneController _sceneController; // Reference to Scene Controller
-
     void Awake() {
         // Populate _lobbyManager
         _lobbyManager = GameObject.FindWithTag("LobbyManager").GetComponent<LobbyManager>();
@@ -50,16 +47,10 @@ public class PopulateEngineScene : MonoBehaviour
         QuestionSO questionSO = osopherSO.osopherQuestions[int.Parse(_roundWinnerQuestion)]; // Round Winner Round QuestionSO
         _videoPlayer.clip = questionSO.engineVideo;
         _videoPlayer.Play();
-        _videoPlayer.loopPointReached += HandleVideoEnd; // Calls HandleVideoEnd when the video is finished playing
 
         // Update Round Winner Message
         _roundWinnerMessage.text = _roundWinnerName;
     } 
-
-    private void HandleVideoEnd(VideoPlayer vp)
-    {
-        _sceneController.GoToEndOfRoundScene();
-    }
 
     private void OnDestroy() {
         if (_lobbyManager != null) {
