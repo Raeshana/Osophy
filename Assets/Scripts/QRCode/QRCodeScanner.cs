@@ -46,6 +46,9 @@ public class QRCodeScanner : MonoBehaviour
     [SerializeField]
     private SceneController _sceneController;
 
+    // used to change the color of instructions box in InitialQRScanningScene
+    public UnityEngine.UI.Image imageComponent;
+
     /// <summary>
     /// Initialize _osopherNumCurr
     /// </summary>
@@ -283,6 +286,7 @@ public class QRCodeScanner : MonoBehaviour
                 function(result.Text); // Call InitialScan or GameplayScan
 
                 // CHANGE INSTRUCTIONS IMAGE COLOUR TO GREEN
+                imageComponent.color = new Color(0.388f, 0.647f, 0.231f, 1.0f);
 
                 //ResetCamera(); // Reset camera for debugging
                 //Debug.Log(result.Text);
@@ -291,12 +295,14 @@ public class QRCodeScanner : MonoBehaviour
                 _text.text = "Oops! Scan again!";
 
                 // CHANGE INSTRUCTIONS IMAGE COLOUR TO RED
+                imageComponent.color = new Color(0.910f, 0.341f, 0.239f, 1.0f);
             }
         } catch (Exception ex) {
             _text.text = "Oops! Scan again!";
             Debug.LogError("Scan Error: " + ex.Message + "\n" + ex.StackTrace);
 
             // CHANGE INSTRUCTIONS IMAGE COLOUR TO RED
+            imageComponent.color = new Color(0.910f, 0.341f, 0.239f, 1.0f);
     }
     }
 }
