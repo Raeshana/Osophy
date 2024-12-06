@@ -35,6 +35,7 @@ public class LobbyManager : MonoBehaviour
     public event EventHandler<LobbyEventArgs> OnJoinedLobbyUpdate; // Triggered when the lobby is updated
     public event EventHandler<LobbyEventArgs> OnChoosePlayer1; // Triggered when the game updates Player1 metadata
     public event EventHandler<LobbyEventArgs> OnChoosePlayer2; // Triggered when the game updates Player2 metadata
+    public event EventHandler<LobbyEventArgs> OnUpdateRoundWinner; // Triggered when the game updates Winner metadata
 
     public class LobbyEventArgs : EventArgs {
         public Lobby lobby { get; set; }
@@ -131,7 +132,11 @@ public class LobbyManager : MonoBehaviour
                 if (SceneManager.GetActiveScene().name == "ChooseOpponentPlayer" || 
                     SceneManager.GetActiveScene().name == "ChooseOpponentSpectator") {
                         OnChoosePlayer2?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
-                    }
+                }
+
+                if (SceneManager.GetActiveScene().name == "EngineScene") {
+                        OnUpdateRoundWinner?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+                }
             }
         }
     }
@@ -139,9 +144,11 @@ public class LobbyManager : MonoBehaviour
     /// <summary>
     /// Creates a Lobby with a join code and the following metadata:
     /// RoundNumber: Begins at 1 and increments at the end of each round
+    /// RoundWinner: ID of the player that wins the round (correct answer and faster answer time)
     /// Player1: ID of the player chosen to play first
     /// Player2: ID of the player chosen by Player1
     /// Spectator: ID of the player who is not playing
+    /// GameWinner: ID of the player with the most cards at the end of 7 rounds
     /// </summary>
     public async void CreateLobby() {
         try {
@@ -151,10 +158,12 @@ public class LobbyManager : MonoBehaviour
                 IsPrivate = false,
                 Player = AddPlayer(),
                 Data = new Dictionary<string, DataObject> {
-                    {"RoundNumber", new DataObject(DataObject.VisibilityOptions.Public, "1")},
+                    {"RoundNumber", new DataObject(DataObject.VisibilityOptions.Public, "0")},
+                    {"RoundWinner", new DataObject(DataObject.VisibilityOptions.Public, "")},
                     {"Player1", new DataObject(DataObject.VisibilityOptions.Public, "")},
                     {"Player2", new DataObject(DataObject.VisibilityOptions.Public, "")},
-                    {"Spectator", new DataObject(DataObject.VisibilityOptions.Public, "")}
+                    {"Spectator", new DataObject(DataObject.VisibilityOptions.Public, "")},
+                    {"GameWinner", new DataObject(DataObject.VisibilityOptions.Public, "")},
                 }
             };
 
@@ -170,7 +179,7 @@ public class LobbyManager : MonoBehaviour
 
             // Go to Lobby Scene
             _sceneController.GoToLobby();  
-            StartCoroutine(InvokeEventInNewScene());
+            StartCoroutine(InvokeOnJoinedLobbyInNewScene());
         } catch (LobbyServiceException e) {
             Debug.Log(e);
         }
@@ -180,7 +189,7 @@ public class LobbyManager : MonoBehaviour
     /// Waits until the scene transitions from MainMenu to Lobby 
     /// </summary>
     /// <returns></returns>
-    private IEnumerator InvokeEventInNewScene() {
+    private IEnumerator InvokeOnJoinedLobbyInNewScene() {
         // Wait until the next frame to allow the scene to load and the listener to be ready
         yield return null;
         // Now invoke the event
@@ -210,7 +219,7 @@ public class LobbyManager : MonoBehaviour
 
             // Go to Lobby Scene
             _sceneController.GoToLobby(); 
-           StartCoroutine(InvokeEventInNewScene());
+           StartCoroutine(InvokeOnJoinedLobbyInNewScene());
         } catch (LobbyServiceException e) {
             Debug.LogError(e);
         }
@@ -235,6 +244,7 @@ public class LobbyManager : MonoBehaviour
                 {"Osopher2", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
                 {"Osopher3", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
                 {"Debater", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "")},
+                {"QuestionNum", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "0")},
                 {"numCards", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "3")},
                 {"isCorrect", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "false")},
                 {"answerTime", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "0")}
@@ -270,6 +280,7 @@ public class LobbyManager : MonoBehaviour
             Debug.Log("Osopher 2: " + player.Data["Osopher2"].Value);
             Debug.Log("Osopher 3: " + player.Data["Osopher3"].Value);
             Debug.Log("Player Debater: " + player.Data["Debater"].Value);
+            Debug.Log("Debater Question Number: " + player.Data["QuestionNum"].Value);
             Debug.Log("numCards: " + player.Data["numCards"].Value);
             Debug.Log("isCorrect: " + player.Data["isCorrect"].Value);
             Debug.Log("answerTime: " + player.Data["answerTime"].Value);
@@ -426,6 +437,40 @@ public class LobbyManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Called by event handler when a player's debater is updated
+    /// so that it can be updated across all clients
+    /// Used to update TriviaSceneSpectator scene
+    /// </summary>
+    /// <param name="debater"></param>
+    public async void UpdatePlayerQuestionNum(string questionNum) {
+        if (_joinedLobby != null) {
+            try {
+                UpdatePlayerOptions options = new UpdatePlayerOptions();
+
+                options.Data = new Dictionary<string, PlayerDataObject>() {
+                    {
+                        "QuestionNum", new PlayerDataObject(
+                            visibility: PlayerDataObject.VisibilityOptions.Public,
+                            value: questionNum)
+                    }
+                };
+
+                // Update Lobby with new player information
+                string playerId = AuthenticationService.Instance.PlayerId;
+                Lobby lobby = await LobbyService.Instance.UpdatePlayerAsync(_joinedLobby.Id, playerId, options);
+                _joinedLobby = lobby;
+
+                // Trigger OnJoinedLobbyUpdate event
+                OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+
+                // PrintPlayers(_joinedLobby);
+            } catch (LobbyServiceException e) {
+                Debug.Log(e); 
+            }   
+        }
+    }
+
+    /// <summary>
     /// Called by event handler when a player's card number is updated
     /// so that it can be updated across all clients
     /// Used to determine overall winner
@@ -521,6 +566,8 @@ public class LobbyManager : MonoBehaviour
 
                 // Trigger OnJoinedLobbyUpdate event
                 OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
+
+                PrintPlayers(_joinedLobby);
             } catch (LobbyServiceException e) {
                 Debug.Log(e); 
             }   
@@ -618,6 +665,105 @@ public class LobbyManager : MonoBehaviour
                 Debug.Log(e);
             }
         }
+    }
+
+    public void DecideRoundWinner() {
+        if (_joinedLobby != null && _joinedLobby.HostId == AuthenticationService.Instance.PlayerId) {
+            // Get player IDs
+            string _player1ID = _joinedLobby.Data["Player1"].Value;
+            string _player2ID = _joinedLobby.Data["Player2"].Value;
+
+            // Get player objects
+            Player _player1 = GetPlayer(_joinedLobby, _player1ID);
+            Player _player2 = GetPlayer(_joinedLobby, _player2ID);
+
+            // Player 1
+            string _player1IsCorrect = _player1.Data["isCorrect"].Value;
+            string _player1AnswerTime = _player1.Data["answerTime"].Value;
+
+            // Player 2
+            string _player2IsCorrect = _player2.Data["isCorrect"].Value;
+            string _player2AnswerTime = _player2.Data["answerTime"].Value;
+
+            // Both players are correct
+            if (_player1IsCorrect == "true" && _player2IsCorrect == "true") {
+                // Convert player answer time strings to floats
+                float _player1Time = Single.Parse(_player1AnswerTime);
+                float _player2Time = Single.Parse(_player2AnswerTime);
+                
+                // Player 1 has less time, player 1 wins
+                if (_player1Time < _player2Time) {
+                    PlayerWins(_player1ID);
+                }
+                else { // Player 2 has less time or players tie (pseudo-random tie breaker), player 2 wins
+                    PlayerWins(_player2ID);
+                }
+            }
+            else if (_player1IsCorrect == "true") { // Player 1 alone is correct
+                PlayerWins(_player1ID);
+            }
+            else if (_player2IsCorrect == "true") { // Player 2 alone is correct
+                PlayerWins(_player2ID);
+            }
+            else { // Neither player 1 nor player 2 is correct
+                // Pseudo-randomly select player 1 as winner
+                PlayerWins(_player1ID);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Not host!");
+            _sceneController.GoToEngineScene(); 
+            StartCoroutine(InvokeOnUpdateRoundWinner());
+        }
+    }
+
+    private void PlayerWins(string playerID) {
+        LobbyManager.Instance.UpdateRoundWinner(playerID);
+    }
+ 
+    public async void UpdateRoundWinner(string roundWinner) {
+        if (AuthenticationService.Instance.PlayerId == _joinedLobby.HostId) {
+            try {
+                UpdateLobbyOptions options = new UpdateLobbyOptions();
+                options.Name = "testLobbyName";
+                options.MaxPlayers = 3;
+                options.IsPrivate = false;
+
+                options.HostId = AuthenticationService.Instance.PlayerId;
+
+                options.Data = new Dictionary<string, DataObject>()
+                {
+                    {
+                        "RoundWinner", new DataObject(
+                            visibility: DataObject.VisibilityOptions.Public,
+                            value: roundWinner)
+                    }
+                };
+
+                var lobby = await LobbyService.Instance.UpdateLobbyAsync(_joinedLobby.Id, options);
+                _joinedLobby = lobby;
+
+                // Trigger OnUpdateRoundWinner event
+                _sceneController.GoToEngineScene(); 
+                StartCoroutine(InvokeOnUpdateRoundWinner());
+
+                PrintPlayers(_joinedLobby);
+            } catch (LobbyServiceException e) {
+                Debug.Log(e);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Waits until the scene transitions from MainMenu to Lobby 
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator InvokeOnUpdateRoundWinner() {
+        // Wait until the next frame to allow the scene to load and the listener to be ready
+        yield return null;
+        // Now invoke the event
+        OnUpdateRoundWinner?.Invoke(this, new LobbyEventArgs { lobby = _joinedLobby });
     }
 
     /// <summary>

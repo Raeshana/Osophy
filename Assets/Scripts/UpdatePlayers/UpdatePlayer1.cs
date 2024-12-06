@@ -11,7 +11,7 @@ public class UpdatePlayer1 : MonoBehaviour
     private LobbyManager _lobbyManager; // Reference to Lobby Manager
 
     [SerializeField] 
-    private TMP_Text _playerNameUI; // // Displays Player1 PlayerName
+    private TMP_Text _playerNameUI; // Displays Player1 PlayerName
 
     void Awake() {
         // Populate _lobbyManager

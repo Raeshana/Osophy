@@ -46,7 +46,12 @@ public class SceneController : MonoBehaviour
         // Ensure CorrectScene is added to the list of scenes in SceneManager
         // Use SceneManager to navigate to this scene
         SceneManager.LoadScene("WrongScene");
+    }
 
+    public void GoToEngineScene(){
+        // Ensure CorrectScene is added to the list of scenes in SceneManager
+        // Use SceneManager to navigate to this scene
+        SceneManager.LoadScene("EngineScene");
     }
 
     public void GoToLobby(){
@@ -83,5 +88,17 @@ public class SceneController : MonoBehaviour
 
     public void GoToSpectatorScene(){
         SceneManager.LoadScene("SpectatorScene");
+    }
+
+    public void GoToWaitingForAnswersScene(){
+        SceneManager.LoadScene("WaitingForAnswersScene");
+    }
+
+    public void GoToEndOfRoundScene(){
+        SceneManager.LoadScene("EndOfRoundScene");
+    }
+
+    public void GoToPlayerTurnScene(){
+        SceneManager.LoadScene("PlayerTurnScene");
     }
 }
